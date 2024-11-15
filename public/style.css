@@ -54,6 +54,8 @@ main {
   box-shadow: 2px 2px 2.9px 0.1px black;
   header {
     h2 {
+      margin: 1em auto;
+      text-decoration: underline;
       text-align: center;
     }
   }
