@@ -21,27 +21,30 @@ h3 {
   padding: 0;
 }
 
-nav {
-  background-color: black;
-  ul {
-    display: flex;
-    justify-content: space-evenly;
-    li {
-      a {
-        color: white;
-      }
-    }
-  }
-}
-
 body {
   max-width: 1080px;
   margin: 0 auto;
   width: 90%;
   header {
-    text-align: center;
-    h1 {
-      font-size: 3em;
+    nav {
+      color: white;
+      background-color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      h1 {
+        display: inline;
+        font-size: 2em;
+      }
+      ul {
+        display: flex;
+        justify-content: space-around;
+        li {
+          a {
+            color: white;
+          }
+        }
+      }
     }
   }
 }
@@ -49,6 +52,11 @@ body {
 main {
   border: 1px solid gray;
   box-shadow: 2px 2px 2.9px 0.1px black;
+  header {
+    h2 {
+      text-align: center;
+    }
+  }
 }
 
 .tienda {
