@@ -8,77 +8,72 @@
   }
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: black;
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    li {
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
 body {
   max-width: 1080px;
   margin: 0 auto;
   width: 90%;
-}
-
-header {
-  text-align: center;
-  background: aquamarine;
-  h1 {
-    margin: 0; /* override top+bottom H1 default */
-    background: fuchsia;
-    font-size: 3em;
-  }
-}
-
-ul {
-  list-style: none;
-  margin: 0; /* override left UL default */
-  padding: 0; /* override left UL default */
-}
-
-nav {
-  background-color: white;
-  ul {
-    background-color: gray;
-    display: flex;
-    justify-content: space-evenly;
-    li {
-      background-color: black;
-      padding: 0.5em;
-      a {
-        text-decoration: none;
-      }
+  header {
+    text-align: center;
+    h1 {
+      font-size: 3em;
     }
   }
+}
+
+main {
+  border: 1px solid gray;
+  box-shadow: 2px 2px 2.9px 0.1px black;
 }
 
 .tienda {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 1fr;
-  grid-auto-flow: dense;
-  article {
-    div {
-      h3 {
-        margin: 0;
-        padding: 0;
+  .articulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-auto-flow: dense;
+    grid-gap: 0.3em;
+    padding: 0 0.3em;
+    padding-bottom: 0.3em;
+    article {
+      img {
+        max-width: 45%;
+        object-fit: scale-down;
       }
+      display: flex;
+      padding: 1em;
+      justify-content: space-between;
+      border-style: solid;
+      border-width: 0.2em;
+      border-color: hsl(10 10% 90%);
+      border-radius: 5px;
     }
-    img {
-      max-width: 40%;
-      object-fit: scale-down;
-    }
-    display: flex;
-    padding: 1em;
-    border-style: solid;
-    border-width: 0.2em;
-    border-color: pink;
   }
-}
-
-/* @media (min-width: 100px) { */
-/*   .tienda { */
-/*   } */
-/* } */
-
-main {
-  /* background-color: green; */
-  border: 1px solid gray;
-  box-shadow: 2px 2px 2.9px 0.1px black;
 }
 
 .testimonios {
