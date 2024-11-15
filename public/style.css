@@ -140,6 +140,27 @@ main {
   }
 }
 
+.acerca {
+  margin: 0 auto;
+  div {
+    padding: 0 2em 2em 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    iframe {
+      aspect-ratio: 16/9;
+      width: 100%;
+    }
+    div {
+      padding: 0 0 0 1em;
+      width: 60%;
+      margin: auto;
+    }
+  }
+}
+
 footer {
   font-size: 0.7em;
   padding: 0.5em 0;
