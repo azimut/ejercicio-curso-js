@@ -1,5 +1,8 @@
 :root {
   font-size: calc(1vw + 0.6em);
+  --foreground: white;
+  --background: black;
+  --border: hsl(10 10% 90%);
 }
 
 @media (min-width: 1080px) {
@@ -27,8 +30,8 @@ body {
   width: 90%;
   header {
     nav {
-      color: white;
-      background-color: black;
+      color: var(--foreground);
+      background-color: var(--background);
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -41,7 +44,7 @@ body {
         justify-content: space-around;
         li {
           a {
-            color: white;
+            color: var(--foreground);
           }
         }
       }
@@ -93,15 +96,15 @@ main {
   article {
     display: flex;
     border-style: solid;
-    border-color: pink;
-    background-color: blue;
+    border-color: hsl(10 10% 98%);
     figure {
+      border: 1px solid var(--background);
+      border-radius: 3px;
+      color: var(--background);
       text-align: center;
-      background-color: lightblue;
     }
     cite {
       margin: auto;
-      background-color: lightcoral;
     }
   }
 }
