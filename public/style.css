@@ -73,6 +73,9 @@ main {
         max-width: 45%;
         object-fit: scale-down;
       }
+      ul > li > i {
+        padding: 0 0.3em;
+      }
       display: flex;
       padding: 1em;
       justify-content: space-between;
