@@ -34,7 +34,7 @@ body {
       background-color: var(--background);
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
       h1 {
         display: inline;
         font-size: 2em;
@@ -111,7 +111,7 @@ main {
 
 .contacto {
   form {
-    padding: 2em;
+    padding: 0 2em 2em 2em;
     display: flex;
     flex-direction: column;
     label {
