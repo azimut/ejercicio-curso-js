@@ -1,0 +1,211 @@
+- https://github.com/JePaFe/Talento-Tech-Comision-24226-Front-End-JS
+
+- After class
+  - render
+
+- vscode
+  - extensions
+    - spanish extension (by Microsoft)
+    - prettier
+    - live server
+  - snippets
+    - "html:5" snippet
+    - "!" snippet (same as above)
+    - lorem: adds lorem lipsum phrase
+    - lorem5: adds 5 words lorem lispum
+
+** PreEntrega
+
+1) html: header/nav/main/section/footer
+2) readme.md: description (purpose, tech)
+3) <form> + spree
+   - nombre, correo, mensaje
+4) css:
+   - header,footer,nav
+   - google fonts
+   - background
+5) flex/grid
+   - secciones: productos (cardsflex), reseñas (grid), contacto (responsive)
+6) multimedia (img,video,iframe)
+
+*** ideas
+
+- asset store (donut, rabbit, dragon, sponza, crytek sponza)
+  - higher vertex, higher, price (aka different models)
+  - change textures?
+  - lootboxes?
+  - avatars
+  - https://en.wikipedia.org/wiki/List_of_common_3D_test_models
+  - https://graphics.stanford.edu/data/3Dscanrep/
+- hotel (spooky movies)
+- subscriptions tiers
+- corruption (?
+  - senadores, diputados
+  - votos
+- asset images
+  - https://en.wikipedia.org/wiki/Lenna
+
+** Ejercicios - Final
+
+https://unsplash.com/
+https://chromewebstore.google.com/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd?pli=1
+https://fakestoreapi.com/
+proyecto-final-ecommerce-nombre-apellido
+github sites / main branch
+
+1) HTML
+   * crear estructura basica de un proyecto
+     - header(h1),main,nav,footer
+   * agregar un README.md
+
+2) HTML
+   * nav>ul
+   * header>img para el logo
+   * section>img+iframe+video
+
+3) HTML
+   - contact form
+   - netlify
+
+4) CSS
+   - add link rel styles.css
+   - header/footer style
+   - usar ~list-style: none~ para <ul>
+   - usar ~text-decoration: none~
+
+5) CSS
+   - google fonts
+   - background image/colorscale
+   - margin/padding
+
+6) CSS products
+   - div/h2/img/a
+   - use flex
+
+** 1 HTML - 12/09
+
+- Metodos de Evaluacion
+  1) Ejercicios Practicos (Brain/Cog) (optativos)
+  2) Cuestionarios
+  3) Ruta de Avance
+  4) Proyecto Integrador
+
+- Pagina vs Sitio
+- Semantico vs Estetico
+- Cliente/Servidor
+- Hay versiones de navegadores para desarrolladores
+  - https://www.mozilla.org/en-US/firefox/developer/
+
+- vscode
+  - extensions
+    - spanish extension (by Microsoft)
+    - prettier
+  - snippets
+    - "html:5" snippet
+    - "!" snippet (same as above)
+    - lorem: adds lorem lipsum phrase
+    - lorem5: adds 5 words lorem lispum
+
+- Observaciones:
+  1) <u> quizas pueda ser agregado a los tags en desuso, porque aparentemente html5 cambio su semantica de ser "underline" a "unarticulated"
+  2) El typo de 01:50:00 (meta/head) demuestra lo permisivos y poco strictos que puden llegar a ser los browsers y linters.
+     Quizas usar un navegador menos potente estaria como prueba final de nuestras paginas.
+
+** 2 HTML - 19/09
+
+- listas ol/ul>li
+- a/download
+  - "","/","../"
+- img/src/alt
+- audio
+- video
+- iframe
+  - src/width/height
+
+- /
+  - /css
+  - /img
+  - /js
+
+- https://picsum.photos/ Returns a random image
+  #+begin_src
+  https://picsum.photos/<SQUAREDIM>
+  https://picsum.photos/<WIDTH>/<HEIGHT>
+  #+end_src
+
+- https://htmlreference.io/
+
+- display
+  - =inline=
+    - br, a, img, span, b, strong, mark, sub
+  - =block=: fills the screen width
+    - div, h?, p, ul, ol, li, table, form
+
+** 3 HTML - 26/09
+
+- usar un div>(label+input)
+- Tablas
+- label uses input's "id" attr, related with "for" attr
+- textarea
+- label+(select>option*10)
+- input
+- Formularios
+  - form>(label+input:text+button:submit)
+    - target=_blank
+    - action=Link
+
+** 4 CSS - 03/10
+
+- html element attributes
+  - title: a hover tooltip
+  - hidden
+  - tabindex: order in TAB
+  - translate: "yes|no"
+  - lang: "es"
+  - spellcheck true/false
+  - draggable: true/false
+
+** 5 CSS - 03/10
+
+- medidas
+  - absolutas: px cm mm pt in pc
+    - border
+    - screen size
+  - relativas: % em rem ex ch
+  - flexibles: vw vh
+
+- fonts can be put on
+  - <link>
+  - @import url()
+
+** 6 CSS flex - 10/10
+** 7 CSS grid - 17/10
+** 9 Javascript 31/10
+- ECMAScript 2015 (ES6)
+- CTRL+SHIFT+I opens recent dev tools
+- CTRL+SHIFT+J opens console
+- <script>
+  - optional src=
+    - disables body
+  - <head>
+  - end of <body>
+- console.log()
+- console.info()
+- console.warn()
+- console.error()
+- console.clear() CTRL+L
+- /* comment */
+- // comment
+- Number(29)
+- new Number(29)
+- Number
+  - parseInt(s[,radix]) - silenty stops at non number char
+  - parseFloat(s[,radix])
+** 11 Javascript 14/11
+
+- functions in javascript
+  - scope
+  - modular/functional
+  - params
+
+- =debugger= js keyword to breakpoint into a debugger
