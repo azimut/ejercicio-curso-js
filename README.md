@@ -1,6 +1,6 @@
 # Proyecto E-Commerce
 
-Tienda de 3D assets.
+Tienda de modelos 3D.
 
 ## Tecnologias
 
