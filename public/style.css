@@ -82,6 +82,11 @@ main {
     padding: 0 0.3em;
     padding-bottom: 0.3em;
     article {
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
       img {
         max-width: 45%;
         object-fit: scale-down;
@@ -97,6 +102,12 @@ main {
       border-color: hsl(10 10% 90%);
       border-radius: 5px;
     }
+  }
+}
+
+@media (min-width: 400px) {
+  .tienda > .articulos {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   }
 }
 
