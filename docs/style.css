@@ -91,7 +91,7 @@ main {
         justify-content: space-between;
       }
       img {
-        max-width: 55%;
+        max-width: 45%;
         object-fit: scale-down;
       }
       ul > li > i {
