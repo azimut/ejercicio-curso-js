@@ -48,7 +48,7 @@ h3 {
 }
 
 body {
-  max-width: 1280px;
+  max-width: 1080px;
   margin: 0 auto;
   width: 90%;
   header {
@@ -62,7 +62,6 @@ body {
       flex-direction: row;
       justify-content: space-around;
       h1 {
-        display: inline;
         font-size: 2em;
         padding: 0.2em 0;
       }
@@ -79,6 +78,11 @@ body {
     background-color: var(--foreground);
     border: 1px solid gray;
     box-shadow: 2px 2px 2.9px 0.1px black;
+    padding-bottom: 1em;
+    > * {
+      max-width: 800px;
+      margin: 0 auto;
+    }
     header {
       h2 {
         margin: 1em auto;
@@ -126,7 +130,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .tienda > .articulos {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   }
@@ -134,8 +138,6 @@ body {
 
 .testimonios {
   article {
-    max-width: 700px;
-    margin: 0 auto;
     padding: 1em;
     display: flex;
     flex-direction: row;
@@ -161,7 +163,6 @@ body {
 
 .contacto {
   form {
-    padding: 0 2em 2em 2em;
     display: flex;
     flex-direction: column;
     label {
@@ -184,7 +185,6 @@ body {
 }
 
 .acerca {
-  margin: 0 auto;
   div {
     padding: 0 2em 2em 2em;
     display: flex;
@@ -204,7 +204,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .acerca {
     div {
       flex-direction: column;
