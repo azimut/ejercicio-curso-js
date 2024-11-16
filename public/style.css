@@ -55,7 +55,6 @@ body {
     font-family: "Share Tech Mono", monospace;
     font-weight: 400;
     font-style: normal;
-
     nav {
       color: var(--foreground);
       background-color: var(--background);
@@ -76,17 +75,21 @@ body {
       }
     }
   }
-}
-
-main {
-  background-color: var(--foreground);
-  border: 1px solid gray;
-  box-shadow: 2px 2px 2.9px 0.1px black;
-  header {
-    h2 {
-      margin: 1em auto;
-      text-align: center;
+  main {
+    background-color: var(--foreground);
+    border: 1px solid gray;
+    box-shadow: 2px 2px 2.9px 0.1px black;
+    header {
+      h2 {
+        margin: 1em auto;
+        text-align: center;
+      }
     }
+  }
+  footer {
+    font-size: 0.7em;
+    padding: 0.5em 0;
+    text-align: center;
   }
 }
 
@@ -210,10 +213,4 @@ main {
       }
     }
   }
-}
-
-footer {
-  font-size: 0.7em;
-  padding: 0.5em 0;
-  text-align: center;
 }
