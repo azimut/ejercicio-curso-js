@@ -123,7 +123,7 @@ main {
   }
 }
 
-@media (min-width: 400px) {
+@media (max-width: 600px) {
   .tienda > .articulos {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   }
@@ -201,7 +201,7 @@ main {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .acerca {
     div {
       flex-direction: column;
