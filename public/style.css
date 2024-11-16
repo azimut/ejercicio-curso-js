@@ -36,8 +36,12 @@ a {
   color: var(--foreground);
 }
 
+a.activo,
 a:hover {
-  text-shadow: 1px 1px 2px;
+  text-shadow: 1.25px 1.25px 2.5px;
+}
+a.activo:hover {
+  text-shadow: none;
 }
 
 h1,
