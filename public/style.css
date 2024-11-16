@@ -201,6 +201,17 @@ main {
   }
 }
 
+@media (max-width: 500px) {
+  .acerca {
+    div {
+      flex-direction: column;
+      div {
+        padding: 0;
+      }
+    }
+  }
+}
+
 footer {
   font-size: 0.7em;
   padding: 0.5em 0;
