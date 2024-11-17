@@ -53,6 +53,7 @@ h3 {
 
 body {
   max-width: 1080px;
+  min-height: 100vh;
   margin: 0 auto;
   width: 92%;
   header {
