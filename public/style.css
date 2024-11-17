@@ -52,10 +52,10 @@ h3 {
 }
 
 body {
-  max-width: 1080px;
   min-height: 100vh;
-  margin: 0 auto;
+  max-width: 1080px;
   width: 92%;
+  margin: 0 auto;
   header {
     font-family: "Share Tech Mono", monospace;
     font-weight: 400;
