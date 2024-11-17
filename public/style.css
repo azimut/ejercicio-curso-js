@@ -113,30 +113,38 @@ body {
     article {
       display: flex;
       padding: 1em;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
       border-style: solid;
       border-width: 0.2em;
       border-color: hsl(10 10% 90%);
       border-radius: 5px;
-      div {
+      div.details {
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         ul > li > i {
           padding: 0 0.3em;
         }
+        button {
+          width: 100%;
+        }
       }
-      img {
-        max-width: 45%;
-        object-fit: scale-down;
+      figure {
+        flex: 1;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
       }
     }
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .tienda > .articulos {
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 
