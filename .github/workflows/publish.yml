@@ -11,6 +11,10 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+
+      - uses: actions/setup-node@v4
+      - run: npm run release
+
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
