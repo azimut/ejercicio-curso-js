@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "release": "postcss public/style.css -o public/style.css",
+    "release": "postcss style.css -o public/style.css",
     "live": "live-server public/"
   },
   "devDependencies": {
