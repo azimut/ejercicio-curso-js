@@ -35,13 +35,19 @@
         method="POST"
       >
         <label for="email"> E-Mail: </label>
-        <input name="email" type="email" placeholder="email@ejemplo.com" />
+        <input
+          name="email"
+          type="email"
+          placeholder="email@ejemplo.com"
+          required
+        />
         <label for="mensaje"> Mensaje: </label>
         <textarea
           name="mensaje"
           cols="30"
           rows="10"
           placeholder="..."
+          required
         ></textarea>
         <button type="submit">Enviar</button>
       </form>
