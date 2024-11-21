@@ -14,6 +14,6 @@ Tienda de modelos 3D.
   - grid: para los elementos de la tienda
 - Javascript
 - npm
-  - usando [live-server](https://www.npmjs.com/package/live-server) para tener feedback inmediato de los cambios
-  - usando [PostCSS](https://www.npmjs.com/package/postcss) para desanidar mi codigo CSS
-  - usando [concurrently](https://www.npmjs.com/package/concurrently) para combinar ambos 2 packages
+  - [live-server](https://www.npmjs.com/package/live-server) para tener feedback inmediato de los cambios
+  - [PostCSS](https://www.npmjs.com/package/postcss) para desanidar mi codigo CSS
+  - [concurrently](https://www.npmjs.com/package/concurrently) para combinar ambos 2 packages
