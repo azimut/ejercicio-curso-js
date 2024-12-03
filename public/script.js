@@ -1,4 +1,4 @@
-function producto2Article(producto) {
+function producto2Article(producto, idx) {
   const { nombre, imagen, creacion, precio, poligonos } = producto;
   const newEle = window.document.createElement("article");
   newEle.innerHTML = `
@@ -9,7 +9,7 @@ function producto2Article(producto) {
         <li><i class="fa-solid fa-cube"></i>${poligonos}</li>
         <li><i class="fa-regular fa-calendar"></i>${creacion}</li>
       </ul>
-      <button>Comprar</button>
+      <button product-id="${idx}">Comprar</button>
     </div>
     <figure>
       <img src="${imagen}" alt="${nombre}" />
@@ -18,16 +18,28 @@ function producto2Article(producto) {
 }
 
 function appendArticles(articles) {
-  articles.forEach((article) =>
-    window.document.querySelector("div.articulos").appendChild(article)
+  articles.forEach((article, idx) =>
+    window.document.querySelector("div.articulos").appendChild(article, idx)
   );
+}
+
+function getProducts() {
+  const jsonProducts = window.localStorage.getItem("products");
+  return JSON.parse(jsonProducts);
+}
+function setProducts(products) {
+  const jsonProducts = JSON.stringify(products);
+  window.localStorage.setItem("products", jsonProducts);
 }
 
 function fillProducts() {
   window
     .fetch("productos.json")
     .then((resp) => resp.json())
-    .then((products) => products.map(producto2Article))
+    .then((products) => {
+      setProducts(products);
+      return products.map(producto2Article);
+    })
     .then((articles) => appendArticles(articles))
     .catch((err) => console.error(err));
 }
