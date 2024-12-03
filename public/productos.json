@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Conejo de Stanford",
+    "imagen": "img/bunny.jpeg",
+    "creacion": 1993,
+    "precio": 10,
+    "poligonos": 69451
+  },
+  {
+    "nombre": "Tetera de Utah",
+    "imagen": "img/utah.png",
+    "creacion": 1993,
+    "precio": 10,
+    "poligonos": 69451
+  }
+]
