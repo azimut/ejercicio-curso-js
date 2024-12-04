@@ -45,12 +45,9 @@ function setCarrito(carrito) {
   storageSet("carrito", carrito);
 }
 
-function incCarritoCount() {
-  const carritoP = window.document.querySelector("p.carrito");
-  carritoP.innerText = parseInt(carritoP.innerText) + 1;
-}
-function getCarritoCount() {
-  return parseInt(window.document.querySelector("p.carrito").value);
+function updateCarritoCount() {
+  window.document.querySelector("p.carrito").innerText =
+    getCarrito().length + 1;
 }
 
 function fillProducts() {
@@ -69,5 +66,5 @@ function buyProduct(pid) {
   let newCarrito = getCarrito();
   newCarrito.push(pid);
   setCarrito(newCarrito);
-  incCarritoCount();
+  updateCarritoCount();
 }
