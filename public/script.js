@@ -46,8 +46,7 @@ function setCarrito(carrito) {
 }
 
 function updateCarritoCount() {
-  window.document.querySelector("p.carrito").innerText =
-    getCarrito().length + 1;
+  window.document.querySelector("p.carrito").innerText = getCarrito().length;
 }
 
 function fillProducts() {
