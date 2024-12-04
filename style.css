@@ -87,6 +87,9 @@ body {
             border: 1px solid white;
             display: flex;
           }
+          .shakeit {
+            animation: skew-x-shake 0.9s 1;
+          }
           p.carrito {
             position: absolute;
             font-weight: bold;
@@ -264,5 +267,32 @@ body {
         padding: 0;
       }
     }
+  }
+}
+
+@keyframes skew-x-shake {
+  0% {
+    transform: skewX(-15deg);
+    background: var(--foreground);
+    color: var(--background);
+  }
+  5% {
+    transform: skewX(15deg);
+    background: var(--background);
+    color: var(--foreground);
+  }
+  10% {
+    transform: skewX(-15deg);
+    background: var(--foreground);
+    color: var(--background);
+  }
+  15% {
+    transform: skewX(15deg);
+  }
+  20% {
+    transform: skewX(0deg);
+  }
+  100% {
+    transform: skewX(0deg);
   }
 }

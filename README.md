@@ -12,6 +12,7 @@ Tienda de modelos 3D.
   - gradient para generar el background que imita a un [UV map](https://beforesandafters.com/2021/01/26/wrapping-around-the-uv-map-in-80-frames%E2%80%A8/) usado en programacion grafica
   - flex
   - grid: para los elementos de la tienda
+  - animacion basada en keyframes para el contador del carrito[*](https://unused-css.com/blog/css-shake-animation/)
 - Javascript
 - npm
   - [live-server](https://www.npmjs.com/package/live-server) para tener feedback inmediato de los cambios

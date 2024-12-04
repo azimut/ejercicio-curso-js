@@ -62,9 +62,16 @@ function fillProducts() {
     .catch((err) => console.error(err));
 }
 
+function shakeit() {
+  const carrito = window.document.querySelector("p.carrito");
+  carrito.classList.add("shakeit");
+  setTimeout(() => carrito.classList.remove("shakeit"), 500);
+}
+
 function buyProduct(pid) {
   let newCarrito = getCarrito();
   newCarrito.push(pid);
   setCarrito(newCarrito);
   updateCarritoCount();
+  shakeit();
 }
