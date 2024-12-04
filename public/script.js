@@ -75,3 +75,7 @@ function buyProduct(pid) {
   updateCarritoCount();
   shakeit();
 }
+
+window.onload = function () {
+  updateCarritoCount();
+};
