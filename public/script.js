@@ -9,7 +9,7 @@ function producto2Article(producto, idx) {
         <li><i class="fa-solid fa-cube"></i>${poligonos}</li>
         <li><i class="fa-regular fa-calendar"></i>${creacion}</li>
       </ul>
-      <button product-id="${idx}">Comprar</button>
+      <button onclick="buyProduct(${idx})">Comprar</button>
     </div>
     <figure>
       <img src="${imagen}" alt="${nombre}" />
@@ -23,13 +23,34 @@ function appendArticles(articles) {
   );
 }
 
+function storageGet(key) {
+  const jsonValue = window.localStorage.getItem(key);
+  return JSON.parse(jsonValue);
+}
+function storageSet(key, value) {
+  const jsonValue = JSON.stringify(value);
+  window.localStorage.setItem(key, jsonValue);
+}
+
 function getProducts() {
-  const jsonProducts = window.localStorage.getItem("products");
-  return JSON.parse(jsonProducts);
+  return storageGet("products") || [];
 }
 function setProducts(products) {
-  const jsonProducts = JSON.stringify(products);
-  window.localStorage.setItem("products", jsonProducts);
+  storageSet("products", products);
+}
+function getCarrito() {
+  return storageGet("carrito") || [];
+}
+function setCarrito(carrito) {
+  storageSet("carrito", carrito);
+}
+
+function incCarritoCount() {
+  const carritoP = window.document.querySelector("p.carrito");
+  carritoP.innerText = parseInt(carritoP.innerText) + 1;
+}
+function getCarritoCount() {
+  return parseInt(window.document.querySelector("p.carrito").value);
 }
 
 function fillProducts() {
@@ -42,4 +63,11 @@ function fillProducts() {
     })
     .then((articles) => appendArticles(articles))
     .catch((err) => console.error(err));
+}
+
+function buyProduct(pid) {
+  let newCarrito = getCarrito();
+  newCarrito.push(pid);
+  setCarrito(newCarrito);
+  incCarritoCount();
 }
