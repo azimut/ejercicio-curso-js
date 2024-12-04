@@ -81,7 +81,7 @@ body {
           align-items: center;
           position: relative;
           object {
-            pointer-events: none; /* NOTE: makes it clickable */
+            pointer-events: none; /* NOTE: makes it NOT clickable */
             height: 2.1em;
             background: white;
             border: 1px solid white;
@@ -101,6 +101,7 @@ body {
             vertical-align: bottom;
             background: white;
             color: black;
+            pointer-events: none; /* NOTE: makes it NOT clickable */
           }
         }
         h1 {
