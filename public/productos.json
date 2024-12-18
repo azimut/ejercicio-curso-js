@@ -3,42 +3,36 @@
     "nombre": "Conejo de Stanford",
     "imagen": "img/bunny.jpeg",
     "creacion": 1993,
-    "precio": 10,
     "poligonos": 69451
   },
   {
     "nombre": "Tetera de Utah",
     "imagen": "img/utah.png",
     "creacion": 1993,
-    "precio": 10,
     "poligonos": 19480
   },
   {
     "nombre": "Suzanne",
     "imagen": "img/suzanne.png",
     "creacion": "2002",
-    "precio": 1337,
     "poligonos": 15279
   },
   {
     "nombre": "Lucy",
     "imagen": "img/lucy.png",
     "creacion": "1996",
-    "precio": 12345,
     "poligonos": 28055742
   },
   {
     "nombre": "Dragon de Stanford",
     "imagen": "img/dragon.png",
     "creacion": "1996",
-    "precio": 49234,
     "poligonos": 1132830
   },
   {
     "nombre": "3DBenchy",
     "imagen": "img/benchy.png",
     "creacion": "2015",
-    "precio": 49234,
     "poligonos": 225154
   }
 ]
