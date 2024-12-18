@@ -3,13 +3,12 @@ function producto2Article(producto, idx) {
     Math.round((np / 1337 + Number.EPSILON) * 100) / 100;
   const { nombre, imagen, creacion, poligonos } = producto;
   const newEle = window.document.createElement("article");
+  const price = computePrice(poligonos);
   newEle.innerHTML = `
     <div class="details">
       <h3>${nombre}</h3>
       <ul>
-        <li><i class="fa-solid fa-sack-dollar"></i>\$${computePrice(
-    poligonos
-  )}</li>
+        <li><i class="fa-solid fa-sack-dollar"></i>\$${price}</li>
         <li><i class="fa-solid fa-cube"></i>${poligonos}</li>
         <li><i class="fa-regular fa-calendar"></i>${creacion}</li>
       </ul>
