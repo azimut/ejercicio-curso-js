@@ -179,11 +179,16 @@ body {
           color: var(--foreground);
           background: var(--background);
           border: 1px solid transparent;
+          text-shadow: none;
         }
         button:hover {
+          text-shadow: 1.25px 1.25px 2.5px;
+        }
+        button:active {
           color: var(--background);
           background: var(--foreground);
           border: 1px solid var(--background);
+          text-shadow: none;
         }
       }
       figure {
