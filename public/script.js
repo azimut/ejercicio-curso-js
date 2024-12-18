@@ -54,11 +54,21 @@ function fillProducts() {
     .fetch("productos.json")
     .then((resp) => resp.json())
     .then((products) => {
-      setProducts(products);
+      setProducts(shuffle(products));
       return products.map(producto2Article);
     })
     .then((articles) => appendArticles(articles))
     .catch((err) => console.error(err));
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let randPos = Math.floor(Math.random() * i);
+    let tmp = arr[randPos];
+    arr[randPos] = arr[i];
+    arr[i] = tmp;
+  }
+  return arr;
 }
 
 function shakeit() {
