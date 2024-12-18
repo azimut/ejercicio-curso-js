@@ -49,7 +49,13 @@ function setCarrito(carrito) {
 }
 
 function updateCarritoCount() {
-  window.document.querySelector("p.carrito").innerText = getCarrito().length;
+  const carrito = window.document.querySelector("p.carrito");
+  const nitems = getCarrito().length;
+  if (nitems === 0) {
+    carrito.innerText = null;
+  } else {
+    carrito.innerText = nitems;
+  }
 }
 
 function fillProducts() {
