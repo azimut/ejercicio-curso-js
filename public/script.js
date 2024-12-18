@@ -24,12 +24,12 @@ function appendArticles(articles) {
 }
 
 function storageGet(key) {
-  const jsonValue = window.localStorage.getItem(key);
+  const jsonValue = window.sessionStorage.getItem(key);
   return JSON.parse(jsonValue);
 }
 function storageSet(key, value) {
   const jsonValue = JSON.stringify(value);
-  window.localStorage.setItem(key, jsonValue);
+  window.sessionStorage.setItem(key, jsonValue);
 }
 
 function getProducts() {
