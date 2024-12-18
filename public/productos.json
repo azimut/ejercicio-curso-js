@@ -33,5 +33,12 @@
     "creacion": "1996",
     "precio": 49234,
     "poligonos": 1132830
+  },
+  {
+    "nombre": "3DBenchy",
+    "imagen": "img/benchy.png",
+    "creacion": "2015",
+    "precio": 49234,
+    "poligonos": 225154
   }
 ]
