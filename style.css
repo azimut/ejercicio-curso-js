@@ -56,6 +56,12 @@ h3 {
   margin: 0;
   padding: 0;
 }
+@media (max-width: 700px) {
+  body > header nav {
+    gap: 1em;
+    flex-direction: column;
+  }
+}
 
 body {
   min-height: 100vh;
@@ -138,12 +144,6 @@ body {
     font-size: 0.7em;
     padding: 0.5em 0;
     text-align: center;
-  }
-}
-
-@media (max-width: 700px) {
-  body header nav div.company h1 {
-    display: none;
   }
 }
 
