@@ -106,7 +106,7 @@ body {
           .shakeit {
             animation: skew-x-shake 0.9s 1;
           }
-          p.carrito {
+          p.contador {
             position: absolute;
             font-weight: bold;
             width: 50%;

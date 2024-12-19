@@ -3,9 +3,9 @@ window.onload = function () {
 };
 
 function updateCarritoCount() {
-  const counter = window.document.querySelector("p.carrito");
+  const contador = window.document.querySelector("p.contador");
   const nitems = getCarrito().size;
-  counter.innerText = nitems === 0 ? null : nitems;
+  contador.innerText = nitems === 0 ? null : nitems;
 }
 
 function fillProducts() {
@@ -82,9 +82,9 @@ function buyProduct(pid) {
 }
 
 function shakeit() {
-  const carrito = window.document.querySelector("p.carrito");
-  carrito.classList.add("shakeit");
-  setTimeout(() => carrito.classList.remove("shakeit"), 500);
+  const contador = window.document.querySelector("p.contador");
+  contador.classList.add("shakeit");
+  setTimeout(() => contador.classList.remove("shakeit"), 500);
 }
 
 function storageGet(key) {
