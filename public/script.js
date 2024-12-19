@@ -1,14 +1,14 @@
-function producto2Article(producto, idx) {
+function producto2Article(producto) {
   const computePrice = (np) =>
     Math.round((np / 1337 + Number.EPSILON) * 100) / 100;
-  const { nombre, imagen, creacion, poligonos } = producto;
+  const { id, nombre, imagen, creacion, poligonos } = producto;
   const price = computePrice(poligonos);
   const carrito = getCarrito();
   const newEle = window.document.createElement("article");
-  if (carrito.includes(idx)) {
+  if (carrito.includes(id)) {
     newEle.classList.add("active");
   }
-  newEle.setAttribute("product-id", idx);
+  newEle.setAttribute("product-id", id);
   newEle.innerHTML = `
     <div class="details">
       <h3>${nombre}</h3>
@@ -17,7 +17,7 @@ function producto2Article(producto, idx) {
         <li><i class="fa-solid fa-cube"></i>${poligonos}</li>
         <li><i class="fa-regular fa-calendar"></i>${creacion}</li>
       </ul>
-      <button onclick="buyProduct(${idx})">Comprar</button>
+      <button onclick="buyProduct(${id})">Comprar</button>
     </div>
     <figure>
       <img src="${imagen}" alt="${nombre}" />
@@ -26,8 +26,8 @@ function producto2Article(producto, idx) {
 }
 
 function appendArticles(articles) {
-  articles.forEach((article, idx) =>
-    window.document.querySelector("div.articulos").appendChild(article, idx)
+  articles.forEach((article) =>
+    window.document.querySelector("div.articulos").appendChild(article)
   );
 }
 
