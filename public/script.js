@@ -5,17 +5,11 @@ window.onload = function () {
 function updateCarritoCount() {
   const carrito = window.document.querySelector("p.carrito");
   const nitems = getCarrito().size;
-  if (nitems === 0) {
-    carrito.innerText = null;
-  } else {
-    carrito.innerText = nitems;
-  }
+  carrito.innerText = nitems === 0 ? null : nitems;
 }
 
 function fillProducts() {
-  window
-    .fetch("productos.json")
-    .then((resp) => resp.json())
+  getProducts()
     .then((products) => {
       setProducts(shuffle(products));
       return products.map(producto2Article);
@@ -105,8 +99,11 @@ function storageSet(key, value) {
   window.sessionStorage.setItem(key, jsonValue);
 }
 
-function getProducts() {
-  return storageGet("products") || [];
+async function getProducts() {
+  const storedProducts = storageGet("products");
+  return storedProducts
+    ? storedProducts
+    : window.fetch("productos.json").then((resp) => resp.json());
 }
 function setProducts(products) {
   storageSet("products", products);
