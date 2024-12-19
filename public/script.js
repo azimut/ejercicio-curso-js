@@ -4,7 +4,7 @@ window.onload = function () {
 
 function updateCarritoCount() {
   const carrito = window.document.querySelector("p.carrito");
-  const nitems = getCarrito().length;
+  const nitems = getCarrito().size;
   if (nitems === 0) {
     carrito.innerText = null;
   } else {
@@ -47,7 +47,7 @@ function producto2Article(producto) {
   const price = computePrice(poligonos);
   const carrito = getCarrito();
   const newArticle = window.document.createElement("article");
-  if (carrito.includes(id)) {
+  if (carrito.has(id)) {
     newArticle.classList.add("active");
   }
   newArticle.setAttribute("product-id", id);
@@ -71,10 +71,13 @@ function buyProduct(pid) {
   const articleEle = window.document.querySelector(
     `article[product-id="${pid}"]`
   );
-  articleEle.classList.add("active");
   const newCarrito = getCarrito();
-  if (!newCarrito.includes(pid)) {
-    newCarrito.push(pid);
+  if (newCarrito.has(pid)) {
+    newCarrito.delete(pid);
+    articleEle.classList.remove("active");
+  } else {
+    articleEle.classList.add("active");
+    newCarrito.add(pid);
   }
   setCarrito(newCarrito);
   updateCarritoCount();
@@ -103,8 +106,8 @@ function setProducts(products) {
   storageSet("products", products);
 }
 function getCarrito() {
-  return storageGet("carrito") || [];
+  return new Set(storageGet("carrito") || []);
 }
 function setCarrito(carrito) {
-  storageSet("carrito", carrito);
+  storageSet("carrito", Array.from(carrito.values()));
 }
