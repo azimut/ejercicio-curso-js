@@ -82,6 +82,7 @@ body {
     background-color: var(--background);
     font-size: 1.3em;
     padding: 0.5em 0;
+    box-shadow: 2px 2px 2.9px 0.1px black;
     nav {
       display: flex;
       justify-content: space-evenly;
