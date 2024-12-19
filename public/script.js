@@ -3,15 +3,16 @@ window.onload = function () {
 };
 
 function updateCarritoCount() {
-  const carrito = window.document.querySelector("p.carrito");
+  const counter = window.document.querySelector("p.carrito");
   const nitems = getCarrito().size;
-  carrito.innerText = nitems === 0 ? null : nitems;
+  counter.innerText = nitems === 0 ? null : nitems;
 }
 
 function fillProducts() {
   getProducts()
     .then((products) => {
-      setProducts(shuffle(products));
+      setProducts(products);
+      shuffle(products);
       return products.map(producto2Article);
     })
     .then(appendChilds)
@@ -21,9 +22,7 @@ function fillProducts() {
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     let randPos = Math.floor(Math.random() * i);
-    let tmp = arr[randPos];
-    arr[randPos] = arr[i];
-    arr[i] = tmp;
+    [arr[randPos], arr[i]] = [arr[i], arr[randPos]]; // swap
   }
   return arr;
 }
@@ -34,14 +33,12 @@ function appendChilds(childs) {
   );
 }
 
-function producto2Article(producto) {
-  const computePrice = (np) =>
-    Math.round((np / 1337 + Number.EPSILON) * 100) / 100;
-  const { id, nombre, imagen, creacion, poligonos } = producto;
+function producto2Article({ id, nombre, imagen, creacion, poligonos }) {
+  const computePrice = (n) =>
+    Math.round((n / 1337 + Number.EPSILON) * 100) / 100;
   const price = computePrice(poligonos);
-  const carrito = getCarrito();
   const newArticle = window.document.createElement("article");
-  if (carrito.has(id)) {
+  if (getCarrito().has(id)) {
     newArticle.classList.add("active");
   }
   newArticle.setAttribute("product-id", id);
@@ -73,8 +70,8 @@ function buyProduct(pid) {
   );
   const newCarrito = getCarrito();
   if (newCarrito.has(pid)) {
-    newCarrito.delete(pid);
     articleEle.classList.remove("active");
+    newCarrito.delete(pid);
   } else {
     articleEle.classList.add("active");
     newCarrito.add(pid);
