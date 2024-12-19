@@ -58,9 +58,18 @@ h3 {
   padding: 0;
 }
 @media (max-width: 700px) {
-  body > header nav {
-    gap: 1em;
-    flex-direction: column;
+  body {
+    > header {
+      width: 100vw;
+      margin-left: -4%;
+      > nav {
+        padding-top: 1em;
+        padding-bottom: 0.2em;
+        font-size: 1.1em;
+        gap: 1.25em;
+        flex-direction: column;
+      }
+    }
   }
 }
 
