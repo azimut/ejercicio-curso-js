@@ -19,7 +19,8 @@ Tienda de modelos 3D.
   - productos agregados al DOM de forma dinamica
   - productos ordenados aleatoriamente en cada recarga [2](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
   - aproximando el precio del producto basado en una propiedad del mismo (numero de poligonos)
-  - arcbprecio redondeado a 2 decimales [1](https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary)
+  - precio redondeado a 2 decimales [1](https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary)
+  - toggle visual de productos comprados, usando [Set()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 - npm
   - [live-server](https://www.npmjs.com/package/live-server) para tener feedback inmediato de los cambios
