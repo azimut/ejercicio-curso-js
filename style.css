@@ -57,21 +57,6 @@ h3 {
   margin: 0;
   padding: 0;
 }
-@media (max-width: 700px) {
-  body {
-    > header {
-      width: 100vw;
-      margin-left: -4%;
-      > nav {
-        padding-top: 1em;
-        padding-bottom: 0.2em;
-        font-size: 1.1em;
-        gap: 1.25em;
-        flex-direction: column;
-      }
-    }
-  }
-}
 
 body {
   min-height: 100vh;
@@ -157,26 +142,39 @@ body {
   }
 }
 
+@media (max-width: 700px) {
+  body {
+    > header {
+      width: 100vw;
+      margin-left: -4%;
+      > nav {
+        padding-top: 1em;
+        padding-bottom: 0.2em;
+        font-size: 1.1em;
+        gap: 1.25em;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
 .tienda {
   .articulos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     grid-auto-rows: 1fr;
     grid-auto-flow: dense;
-    grid-gap: 0.3em;
-    padding-bottom: 0.3em;
+    gap: 1.5em;
+    padding-bottom: 0.5em;
     article.active {
       border-image: linear-gradient(45deg, lime, darkorange) 1;
     }
     article {
       display: flex;
-      padding: 1em;
+      padding: 0.5em 1em;
       justify-content: center;
       align-items: center;
-      border-style: solid;
-      border-width: 0.2em;
-      border-color: hsl(10 10% 90%);
-      border-radius: 5px;
+      border: 0.2em solid hsl(10 10% 90%);
       div.details {
         flex: 1;
         display: flex;
@@ -215,10 +213,10 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .tienda > .articulos {
-    gap: 1em;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.8em;
   }
 }
 
