@@ -2,8 +2,13 @@ function producto2Article(producto, idx) {
   const computePrice = (np) =>
     Math.round((np / 1337 + Number.EPSILON) * 100) / 100;
   const { nombre, imagen, creacion, poligonos } = producto;
-  const newEle = window.document.createElement("article");
   const price = computePrice(poligonos);
+  const carrito = getCarrito();
+  const newEle = window.document.createElement("article");
+  if (carrito.includes(idx)) {
+    newEle.classList.add("active");
+  }
+  newEle.setAttribute("product-id", idx);
   newEle.innerHTML = `
     <div class="details">
       <h3>${nombre}</h3>
@@ -87,8 +92,14 @@ function shakeit() {
 }
 
 function buyProduct(pid) {
-  let newCarrito = getCarrito();
-  newCarrito.push(pid);
+  const articleEle = window.document.querySelector(
+    `article[product-id="${pid}"]`
+  );
+  articleEle.classList.add("active");
+  const newCarrito = getCarrito();
+  if (!newCarrito.includes(pid)) {
+    newCarrito.push(pid);
+  }
   setCarrito(newCarrito);
   updateCarritoCount();
   shakeit();
