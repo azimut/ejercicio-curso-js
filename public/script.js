@@ -55,9 +55,15 @@ function producto2Article(producto) {
     <div class="details">
       <h3>${nombre}</h3>
       <ul>
-        <li><i class="fa-solid fa-sack-dollar"></i>\$${price}</li>
-        <li><i class="fa-solid fa-cube"></i>${poligonos}</li>
-        <li><i class="fa-regular fa-calendar"></i>${creacion}</li>
+        <li title="Precio">
+          <i class="fa-solid fa-sack-dollar"></i>\$${price}
+        </li>
+        <li title="Numero de poligonos">
+          <i class="fa-solid fa-cube"></i>${poligonos}
+        </li>
+        <li title="Año de creacion">
+          <i class="fa-regular fa-calendar"></i>${creacion}
+        </li>
       </ul>
       <button onclick="buyProduct(${id})">Comprar</button>
     </div>
