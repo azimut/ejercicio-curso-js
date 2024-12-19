@@ -13,12 +13,22 @@ function fillProducts() {
     .then((products) => {
       setProducts(products);
       shuffle(products);
+      sortByCarrito(products);
       return products.map(producto2Article);
     })
     .then(appendChilds)
     .catch((err) => console.error(err));
 }
 
+function sortByCarrito(products) {
+  const carrito = getCarrito();
+  products.sort(function (a, b) {
+    if (carrito.has(a.id) && carrito.has(b.id))
+      return a.nombre < b.nombre ? 0 : 1;
+    else if (carrito.has(a.id)) return 0;
+    else return 1;
+  });
+}
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     let randPos = Math.floor(Math.random() * i);
