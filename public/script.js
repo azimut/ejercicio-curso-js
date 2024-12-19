@@ -1,15 +1,57 @@
+window.onload = function () {
+  updateCarritoCount();
+};
+
+function updateCarritoCount() {
+  const carrito = window.document.querySelector("p.carrito");
+  const nitems = getCarrito().length;
+  if (nitems === 0) {
+    carrito.innerText = null;
+  } else {
+    carrito.innerText = nitems;
+  }
+}
+
+function fillProducts() {
+  window
+    .fetch("productos.json")
+    .then((resp) => resp.json())
+    .then((products) => {
+      setProducts(shuffle(products));
+      return products.map(producto2Article);
+    })
+    .then(appendChilds)
+    .catch((err) => console.error(err));
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let randPos = Math.floor(Math.random() * i);
+    let tmp = arr[randPos];
+    arr[randPos] = arr[i];
+    arr[i] = tmp;
+  }
+  return arr;
+}
+
+function appendChilds(childs) {
+  childs.forEach((child) =>
+    window.document.querySelector("div.articulos").appendChild(child)
+  );
+}
+
 function producto2Article(producto) {
   const computePrice = (np) =>
     Math.round((np / 1337 + Number.EPSILON) * 100) / 100;
   const { id, nombre, imagen, creacion, poligonos } = producto;
   const price = computePrice(poligonos);
   const carrito = getCarrito();
-  const newEle = window.document.createElement("article");
+  const newArticle = window.document.createElement("article");
   if (carrito.includes(id)) {
-    newEle.classList.add("active");
+    newArticle.classList.add("active");
   }
-  newEle.setAttribute("product-id", id);
-  newEle.innerHTML = `
+  newArticle.setAttribute("product-id", id);
+  newArticle.innerHTML = `
     <div class="details">
       <h3>${nombre}</h3>
       <ul>
@@ -22,13 +64,27 @@ function producto2Article(producto) {
     <figure>
       <img src="${imagen}" alt="${nombre}" />
     </figure>`;
-  return newEle;
+  return newArticle;
 }
 
-function appendArticles(articles) {
-  articles.forEach((article) =>
-    window.document.querySelector("div.articulos").appendChild(article)
+function buyProduct(pid) {
+  const articleEle = window.document.querySelector(
+    `article[product-id="${pid}"]`
   );
+  articleEle.classList.add("active");
+  const newCarrito = getCarrito();
+  if (!newCarrito.includes(pid)) {
+    newCarrito.push(pid);
+  }
+  setCarrito(newCarrito);
+  updateCarritoCount();
+  shakeit();
+}
+
+function shakeit() {
+  const carrito = window.document.querySelector("p.carrito");
+  carrito.classList.add("shakeit");
+  setTimeout(() => carrito.classList.remove("shakeit"), 500);
 }
 
 function storageGet(key) {
@@ -52,59 +108,3 @@ function getCarrito() {
 function setCarrito(carrito) {
   storageSet("carrito", carrito);
 }
-
-function updateCarritoCount() {
-  const carrito = window.document.querySelector("p.carrito");
-  const nitems = getCarrito().length;
-  if (nitems === 0) {
-    carrito.innerText = null;
-  } else {
-    carrito.innerText = nitems;
-  }
-}
-
-function fillProducts() {
-  window
-    .fetch("productos.json")
-    .then((resp) => resp.json())
-    .then((products) => {
-      setProducts(shuffle(products));
-      return products.map(producto2Article);
-    })
-    .then((articles) => appendArticles(articles))
-    .catch((err) => console.error(err));
-}
-
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    let randPos = Math.floor(Math.random() * i);
-    let tmp = arr[randPos];
-    arr[randPos] = arr[i];
-    arr[i] = tmp;
-  }
-  return arr;
-}
-
-function shakeit() {
-  const carrito = window.document.querySelector("p.carrito");
-  carrito.classList.add("shakeit");
-  setTimeout(() => carrito.classList.remove("shakeit"), 500);
-}
-
-function buyProduct(pid) {
-  const articleEle = window.document.querySelector(
-    `article[product-id="${pid}"]`
-  );
-  articleEle.classList.add("active");
-  const newCarrito = getCarrito();
-  if (!newCarrito.includes(pid)) {
-    newCarrito.push(pid);
-  }
-  setCarrito(newCarrito);
-  updateCarritoCount();
-  shakeit();
-}
-
-window.onload = function () {
-  updateCarritoCount();
-};
