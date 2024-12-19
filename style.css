@@ -113,7 +113,6 @@ body {
             text-align: center;
             margin: 0;
             padding: 0;
-            border-radius: 3px;
             vertical-align: bottom;
             background: white;
             color: black;
@@ -166,7 +165,7 @@ body {
     grid-gap: 0.3em;
     padding-bottom: 0.3em;
     article.active {
-      border-image: linear-gradient(45deg, lime, green) 1;
+      border-image: linear-gradient(45deg, lime, darkorange) 1;
     }
     article {
       display: flex;
