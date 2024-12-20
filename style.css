@@ -75,8 +75,10 @@ body {
       div.company {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        h1 {
+          margin-left: 0.2em;
+          font-size: 2em;
+        }
         div.logo {
           display: flex;
           justify-content: center;
@@ -105,16 +107,10 @@ body {
             pointer-events: none; /* NOTE: makes it NOT clickable */
           }
         }
-        h1 {
-          margin-left: 0.2em;
-          font-size: 2em;
-        }
       }
       ul {
         display: flex;
-        li {
-          padding: 0 0.5em;
-        }
+        gap: 1em;
       }
     }
   }
@@ -297,8 +293,7 @@ body {
       width: 100vw;
       margin-left: -4%;
       > nav {
-        padding-top: 1em;
-        padding-bottom: 0.2em;
+        padding-top: 0.8em;
         font-size: 1.1em;
         gap: 1.25em;
         flex-direction: column;
