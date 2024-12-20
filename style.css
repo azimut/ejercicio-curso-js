@@ -28,7 +28,11 @@ header {
   font-style: normal;
 }
 
-figure {
+figure,
+p,
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
@@ -49,13 +53,6 @@ a:hover {
 }
 a.activo:hover {
   text-shadow: none;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-  padding: 0;
 }
 
 body {
@@ -99,8 +96,6 @@ body {
             font-weight: bold;
             width: 50%;
             text-align: center;
-            margin: 0;
-            padding: 0;
             vertical-align: bottom;
             background: white;
             color: black;
