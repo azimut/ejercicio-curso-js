@@ -24,9 +24,10 @@ function sortByCarrito(products) {
   const carrito = getCarrito();
   products.sort(function (a, b) {
     if (carrito.has(a.id) && carrito.has(b.id))
-      return a.nombre < b.nombre ? 0 : 1;
-    else if (carrito.has(a.id)) return 0;
-    else return 1;
+      return a.nombre < b.nombre ? -1 : 1;
+    else if (carrito.has(a.id)) return -1;
+    else if (carrito.has(b.id)) return +1;
+    else return 0;
   });
 }
 function shuffle(arr) {
