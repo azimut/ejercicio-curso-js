@@ -116,7 +116,6 @@ body {
   }
   main {
     background-color: var(--foreground);
-    border: 1px solid gray;
     box-shadow: 2px 2px 2.9px 0.1px black;
     padding-bottom: 1em;
     > * {
@@ -126,8 +125,8 @@ body {
     }
     header {
       h2 {
-        margin: 1em auto;
         text-align: center;
+        padding: 0.7em 0;
       }
     }
   }
