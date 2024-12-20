@@ -12,7 +12,7 @@ function fillProducts() {
   getProducts()
     .then((products) => {
       setProducts(products);
-      shuffle(products);
+      sortBySecretRecommendationAlgo(products);
       sortByCarrito(products);
       return products.map(producto2Article);
     })
@@ -30,7 +30,7 @@ function sortByCarrito(products) {
     else return 0;
   });
 }
-function shuffle(arr) {
+function sortBySecretRecommendationAlgo(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     let randPos = Math.floor(Math.random() * i);
     [arr[randPos], arr[i]] = [arr[i], arr[randPos]]; // swap
