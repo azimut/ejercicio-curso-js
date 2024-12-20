@@ -4,8 +4,15 @@ window.onload = function () {
 
 function updateCarritoCount() {
   const contador = window.document.querySelector("p.contador");
+  const anuncio = window.document.querySelector("div.anuncio");
   const nitems = getCarrito().size;
-  contador.innerText = nitems === 0 ? null : nitems;
+  if (getCarrito().size === 0) {
+    contador.innerText = null;
+    anuncio.classList.remove("anuncia");
+  } else {
+    contador.innerText = nitems;
+    anuncio.classList.add("anuncia");
+  }
 }
 
 function fillProducts() {

@@ -125,6 +125,29 @@ body {
       }
     }
   }
+  .anuncio {
+    background: repeating-linear-gradient(
+      45deg,
+      #606dbc,
+      #606dbc 10px,
+      #465298 10px,
+      #465298 20px
+    );
+    box-shadow: 2px 2px 2.9px 0.1px black;
+    color: var(--foreground);
+    font-size: 0em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+  }
+  .anuncia {
+    animation: grower 2s forwards;
+  }
+  @keyframes grower {
+    100% {
+      font-size: 1.25em;
+    }
+  }
   footer {
     font-size: 0.7em;
     padding: 0.5em 0;
@@ -292,6 +315,9 @@ body {
         gap: 1.25em;
         flex-direction: column;
       }
+    }
+    .anuncio {
+      padding: 0.25em 0;
     }
   }
   .tienda > .articulos {
