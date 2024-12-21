@@ -1,3 +1,11 @@
+- Cursos empieza marzo,
+  - +fedemaciel.org/quebackenddeboser/+
+  - https://padlet.com/maximilianotorres4/mi-padlet-magn-fico-5wts9ko3ffwrzfqi
+  - https://buenosaires.gob.ar/educacion/agencia-de-habilidades-para-el-futuro-nueva/talento-tech-adultos
+  - inscripcion empieza en febrero 3
+  - 1 semana despues para no cursantes
+  - 1 curso a la vez (por cuatrimestre)
+
 - https://github.com/JePaFe/Talento-Tech-Comision-24226-Front-End-JS
 
 - After class
@@ -13,6 +21,27 @@
     - "!" snippet (same as above)
     - lorem: adds lorem lipsum phrase
     - lorem5: adds 5 words lorem lispum
+
+** ideas
+
+- dialog
+  - action on =comprar!= button
+    - remove all items from carrito
+    - show message/alert?
+  - +comptuar factura+
+    - cerrar cuando se elimina todo
+    - recomputar cuando se elimina
+  - when empty, close dialog
+  - on close, redraw borders
+
+- slide/ make a bar appear when there are things on carriot to purchase them
+- change item product color image when enabled
+- rotate image on click?
+- =burger menu= for mobile
+- +sort by selected and name (at least on reload)+
+- +click again to cancel purchase+
+- +=hide= purchased items+
+- +do NOT show =0 on counter=+
 
 ** PreEntrega
 
@@ -36,7 +65,8 @@
   - lootboxes?
   - avatars
   - https://en.wikipedia.org/wiki/List_of_common_3D_test_models
-  - https://graphics.stanford.edu/data/3Dscanrep/
+  - stanford scans https://graphics.stanford.edu/data/3Dscanrep/
+  - utah teapot https://users.cs.utah.edu/~dejohnso/models/teapot.html
 - hotel (spooky movies)
 - subscriptions tiers
 - corruption (?
@@ -82,7 +112,7 @@ github sites / main branch
    - div/h2/img/a
    - use flex
 
-** 1 HTML - 12/09
+**  1 HTML - 12/09
 
 - Metodos de Evaluacion
   1) Ejercicios Practicos (Brain/Cog) (optativos)
@@ -111,7 +141,7 @@ github sites / main branch
   2) El typo de 01:50:00 (meta/head) demuestra lo permisivos y poco strictos que puden llegar a ser los browsers y linters.
      Quizas usar un navegador menos potente estaria como prueba final de nuestras paginas.
 
-** 2 HTML - 19/09
+**  2 HTML - 19/09
 
 - listas ol/ul>li
 - a/download
@@ -141,7 +171,7 @@ github sites / main branch
   - =block=: fills the screen width
     - div, h?, p, ul, ol, li, table, form
 
-** 3 HTML - 26/09
+**  3 HTML - 26/09
 
 - usar un div>(label+input)
 - Tablas
@@ -154,7 +184,7 @@ github sites / main branch
     - target=_blank
     - action=Link
 
-** 4 CSS - 03/10
+**  4 CSS - 03/10
 
 - html element attributes
   - title: a hover tooltip
@@ -165,7 +195,7 @@ github sites / main branch
   - spellcheck true/false
   - draggable: true/false
 
-** 5 CSS - 03/10
+**  5 CSS - 03/10
 
 - medidas
   - absolutas: px cm mm pt in pc
@@ -178,9 +208,9 @@ github sites / main branch
   - <link>
   - @import url()
 
-** 6 CSS flex - 10/10
-** 7 CSS grid - 17/10
-** 9 Javascript 31/10
+**  6 CSS flex   10/10
+**  7 CSS grid   17/10
+**  9 Javascript 31/10
 - ECMAScript 2015 (ES6)
 - CTRL+SHIFT+I opens recent dev tools
 - CTRL+SHIFT+J opens console
@@ -209,3 +239,90 @@ github sites / main branch
   - params
 
 - =debugger= js keyword to breakpoint into a debugger
+
+** 12 Javascript 21/11
+
+.innerText
+.innerHTML
+.textContent
+
+document.createElement
+document.createTextNode
+
+.innerHTML
+<ELE>.textContent = "asd"
+<ELE>.append(<textNODE>)
+<ELE>.appendChild(<NODE>)
+<ELE>.cloneNode(true)
+<ELE>.style.color = "orange"
+<ELE>.classList.add('othercls')
+<ELE>.remove()
+<ELE>.insertAdjacentHTML(<position>,<textNode>)
+- beforebegin, afterbegin, beforeend, afterend
+
+*** Selectores
+|------------------------+---------------+---------|
+| <l>                    |      <c>      |   <c>   |
+| window.document        |   argument    | returns |
+|------------------------+---------------+---------|
+| .getElementById        |  ('idname')   |   ele   |
+| .getElementByTagName   |    ('h2')     |  [ele]  |
+| .getElementByClassName | ('classname') |  [ele]  |
+| .getElementByName      | ('somename')  |   ele   |
+|------------------------+---------------+---------|
+| .querySelector         | CSS selector  |   ele   |
+| .querySelectorAll      | CSS selector  |  [ele]  |
+|------------------------+---------------+---------|
+*** Eventos
+|-----------+----------+------------------|
+| html attr | js prop  | addEventListener |
+|-----------+----------+------------------|
+| onHover   |          |                  |
+| onClick   | .onclick | click            |
+| onResize  |          |                  |
+| onScroll  |          |                  |
+|           |          | DOMContentLoaded |
+|-----------+----------+------------------|
+#+begin_src js
+ele.onclick = () => alert('f00');
+ele.addEventListener('click', () => alert('foo'));
+#+end_src
+
+** 10 AfterClass 26/11
+
+https://www.mydevice.io/ - lists common resolutions
+https://www.webmobilefirst.com - simulador mobile
+
+** 13 Javascript 28/11 LocalStorage
+
+localStorage
+sessionStorage
+
+max capacity 5M-10M
+
+.clear()
+.removeItem(key)
+.getItem(key)
+.setItem(key,value)
+
+JSON
+.parse      (string -> JSON)
+.stringify  (JSON -> string)
+
+** 14 Async
+
+http methods
+http status
+promise status
+- pending
+- resolved
+- rejected
+
+- fake json api for testing
+  https://jsonplaceholder.typicode.com/
+- randomuser.me
+
+Body.json() async
+JSON.parse() sync
+
+async/await (goes well with try/catch)

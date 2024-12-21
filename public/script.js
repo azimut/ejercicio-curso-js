@@ -2,19 +2,6 @@ window.onload = function () {
   updateCarritoCount();
 };
 
-function updateCarritoCount() {
-  const contador = window.document.querySelector("p.contador");
-  const anuncio = window.document.querySelector("div.anuncio");
-  const nitems = getCarrito().size;
-  if (getCarrito().size === 0) {
-    contador.innerText = null;
-    anuncio.classList.remove("anuncia");
-  } else {
-    contador.innerText = nitems;
-    anuncio.classList.add("anuncia");
-  }
-}
-
 function fillProducts() {
   getProducts()
     .then((products) => {
@@ -23,7 +10,7 @@ function fillProducts() {
       sortByCarrito(products);
       return products.map(producto2Article);
     })
-    .then(appendChilds)
+    .then(appendToStore)
     .catch((err) => console.error(err));
 }
 
@@ -45,15 +32,19 @@ function sortBySecretRecommendationAlgo(arr) {
   return arr;
 }
 
-function appendChilds(childs) {
-  childs.forEach((child) =>
-    window.document.querySelector("div.articulos").appendChild(child)
-  );
+function appendToStore(elements) {
+  const articulos = window.document.querySelector("div.articulos");
+  elements.forEach((el) => articulos.appendChild(el));
+}
+
+function roundPrice(price) {
+  return Math.round((price + Number.EPSILON) * 100) / 100;
+}
+function computePrice(n) {
+  return roundPrice(n / 1337);
 }
 
 function producto2Article({ id, nombre, imagen, creacion, poligonos }) {
-  const computePrice = (n) =>
-    Math.round((n / 1337 + Number.EPSILON) * 100) / 100;
   const price = computePrice(poligonos);
   const newArticle = window.document.createElement("article");
   if (getCarrito().has(id)) {
@@ -83,27 +74,104 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos }) {
 }
 
 function buyProduct(pid) {
-  const articleEle = window.document.querySelector(
-    `article[product-id="${pid}"]`
-  );
-  const newCarrito = getCarrito();
-  if (newCarrito.has(pid)) {
-    articleEle.classList.remove("active");
-    newCarrito.delete(pid);
+  const article = window.document.querySelector(`article[product-id="${pid}"]`);
+  const carrito = getCarrito();
+  if (carrito.has(pid)) {
+    article.classList.remove("active");
+    deleteFromCarrito(pid);
   } else {
-    articleEle.classList.add("active");
-    newCarrito.add(pid);
+    article.classList.add("active");
+    addToCarrito(pid);
   }
-  setCarrito(newCarrito);
   updateCarritoCount();
   shakeit();
 }
 
+/* Counter Carrito */
+
+function updateCarritoCount() {
+  const contador = window.document.querySelector("p.contador");
+  const anuncio = window.document.querySelector("div.anuncio");
+  const nitems = getCarrito().size;
+  if (getCarrito().size === 0) {
+    contador.innerText = null;
+    anuncio.classList.remove("anuncia");
+  } else {
+    contador.innerText = nitems;
+    anuncio.classList.add("anuncia");
+  }
+}
 function shakeit() {
   const contador = window.document.querySelector("p.contador");
   contador.classList.add("shakeit");
   setTimeout(() => contador.classList.remove("shakeit"), 500);
 }
+
+/* Dialog Carrito */
+
+function closeDialog() {
+  window.document.querySelector("dialog").close();
+}
+function showDialog() {
+  fillCarrito();
+  window.document.querySelector("dialog").showModal();
+}
+function fillCarrito() {
+  getProducts()
+    .then(keepProductsInCarrito)
+    .then((products) => {
+      fillFactura(products);
+      return products.map(productToElement);
+    })
+    .then(appendToCarrito)
+    .catch(console.error);
+}
+function fillFactura(products) {
+  const total = products.reduce(
+    (acc, { poligonos }) => acc + computePrice(poligonos),
+    0
+  );
+  const factura = window.document.querySelector("table.factura");
+  factura.innerHTML = `
+    <tr><td>Items:</td><td>${products.length}</td></tr>
+    <tr><td>Total:</td><td><mark>\$${roundPrice(total)}</mark></td></tr>
+  `;
+}
+function appendToCarrito(elements) {
+  const dock = window.document.querySelector("table.dock");
+  dock.innerHTML = null;
+  elements.forEach((el) => dock.appendChild(el));
+}
+function productToElement({ id, nombre, imagen, poligonos }) {
+  const precio = computePrice(poligonos);
+  const newItem = window.document.createElement("tr");
+  newItem.setAttribute("product-id", id);
+  newItem.innerHTML = `
+    <td>${nombre}</td>
+    <td>
+      <img src="${imagen}" alt="${nombre}" />
+    </td>
+    <td>\$${precio}</td>
+    <td>
+      <button onclick="removeElementFromCarrito(${id})">X</button>
+    </td>
+  `;
+  return newItem;
+}
+function removeElementFromCarrito(pid) {
+  const product = window.document.querySelector(
+    `table.dock tr[product-id="${pid}"]`
+  );
+  deleteFromCarrito(pid);
+  if (product) product.remove();
+  if (getCarrito().size === 0) closeDialog();
+}
+function keepProductsInCarrito(products) {
+  const carrito = getCarrito();
+  return products.filter((p) => carrito.has(p.id));
+}
+
+/* Session Storage */
 
 function storageGet(key) {
   const jsonValue = window.sessionStorage.getItem(key);
@@ -125,6 +193,14 @@ function setProducts(products) {
 }
 function getCarrito() {
   return new Set(storageGet("carrito") || []);
+}
+function addToCarrito(pid) {
+  setCarrito(getCarrito().add(pid));
+}
+function deleteFromCarrito(pid) {
+  const carrito = getCarrito();
+  carrito.delete(pid);
+  setCarrito(carrito);
 }
 function setCarrito(carrito) {
   storageSet("carrito", Array.from(carrito.values()));
