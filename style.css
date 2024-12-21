@@ -55,6 +55,93 @@ a.activo:hover {
   text-shadow: none;
 }
 
+button {
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid transparent;
+  text-shadow: none;
+}
+button:hover {
+  text-shadow: 1.25px 1.25px 2.5px;
+}
+button:active {
+  color: var(--background);
+  background: var(--foreground);
+  border: 1px solid var(--background);
+  text-shadow: none;
+}
+
+dialog {
+  z-index: 1;
+  max-width: 600px;
+  padding: 1em;
+  font-size: 1.4em;
+  border: none;
+  width: 80%;
+  > button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    border-radius: 50%;
+  }
+  header {
+    h1 {
+      text-align: center;
+      text-decoration: underline;
+      padding-bottom: 0.2em;
+    }
+  }
+  table.dock {
+    height: 10em;
+    overflow: scroll;
+    border-collapse: collapse;
+    tr {
+      td {
+        padding: 2em 0.5em;
+        text-align: center;
+        img {
+          vertical-align: middle;
+          width: 30%;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+    tr:not(:last-child) {
+      border-bottom: 2px solid lightgray;
+    }
+  }
+  div.checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5em;
+    align-items: center;
+    table.factura {
+      border-collapse: collapse;
+      td {
+        padding: 0.25em;
+      }
+      tr:last-child {
+        td:nth-child(odd) {
+          font-weight: bold;
+        }
+      }
+      td:nth-child(even) {
+        text-align: right;
+      }
+    }
+    > button {
+      padding: 0.5em;
+    }
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
 body {
   min-height: 100vh;
   max-width: 1080px;
@@ -184,19 +271,6 @@ body {
         }
         button {
           width: 100%;
-          color: var(--foreground);
-          background: var(--background);
-          border: 1px solid transparent;
-          text-shadow: none;
-        }
-        button:hover {
-          text-shadow: 1.25px 1.25px 2.5px;
-        }
-        button:active {
-          color: var(--background);
-          background: var(--foreground);
-          border: 1px solid var(--background);
-          text-shadow: none;
         }
       }
       figure {
@@ -304,8 +378,14 @@ body {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   body {
+    dialog {
+      width: 85%;
+    }
+    dialog table.dock tr td img {
+      width: 90%;
+    }
     > header {
       width: 100vw;
       margin-left: -4%;
