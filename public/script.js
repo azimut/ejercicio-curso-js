@@ -3,7 +3,11 @@ window.onload = () => {
 };
 
 function fillProducts() {
-  if (window.location.pathname !== "/") return;
+  if (
+    window.location.pathname !== "/" ||
+    window.location.pathname !== "/ejercicio-curso-js/"
+  )
+    return;
   getProducts()
     .then((products) => {
       setProducts(products);
