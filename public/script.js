@@ -26,10 +26,9 @@ function sortByCarrito(products) {
 }
 function sortBySecretRecommendationAlgo(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    let randPos = Math.floor(Math.random() * i);
+    const randPos = Math.floor(Math.random() * i);
     [arr[randPos], arr[i]] = [arr[i], arr[randPos]]; // swap
   }
-  return arr;
 }
 
 function appendToStore(elements) {
@@ -44,8 +43,7 @@ function computePrice(n) {
   return roundPrice(n / 1337);
 }
 
-function producto2Article({ id, nombre, imagen, creacion, poligonos }) {
-  const price = computePrice(poligonos);
+function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   const newArticle = window.document.createElement("article");
   if (getCarrito().has(id)) {
     newArticle.classList.add("active");
@@ -56,7 +54,7 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos }) {
       <h3>${nombre}</h3>
       <ul>
         <li title="Precio">
-          <i class="fa-solid fa-sack-dollar"></i>\$${price}
+          <i class="fa-solid fa-sack-dollar"></i>\$${precio}
         </li>
         <li title="Numero de poligonos">
           <i class="fa-solid fa-cube"></i>${poligonos}
@@ -127,10 +125,7 @@ function fillCarrito() {
     .catch(console.error);
 }
 function fillFactura(products) {
-  const total = products.reduce(
-    (acc, { poligonos }) => acc + computePrice(poligonos),
-    0
-  );
+  const total = products.reduce((acc, { precio }) => acc + precio, 0);
   const factura = window.document.querySelector("table.factura");
   factura.innerHTML = `
     <tr><td>Items:</td><td>${products.length}</td></tr>
@@ -142,8 +137,7 @@ function appendToCarrito(elements) {
   dock.innerHTML = null;
   elements.forEach((el) => dock.appendChild(el));
 }
-function productToElement({ id, nombre, imagen, poligonos }) {
-  const precio = computePrice(poligonos);
+function productToElement({ id, nombre, imagen, precio }) {
   const newItem = window.document.createElement("tr");
   newItem.setAttribute("product-id", id);
   newItem.innerHTML = `
@@ -186,7 +180,15 @@ async function getProducts() {
   const storedProducts = storageGet("products");
   return storedProducts
     ? storedProducts
-    : window.fetch("productos.json").then((resp) => resp.json());
+    : window
+      .fetch("productos.json")
+      .then((resp) => resp.json())
+      .then((products) =>
+        products.map((product) => {
+          product.precio = computePrice(product.poligonos);
+          return product;
+        })
+      );
 }
 function setProducts(products) {
   storageSet("products", products);
