@@ -1,6 +1,5 @@
-window.onload = function () {
-  updateCarritoCount();
-  updateAnuncio();
+window.onload = () => {
+  updateVisuals();
 };
 
 function fillProducts() {
@@ -47,9 +46,7 @@ function computePrice(n) {
 
 function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   const newArticle = window.document.createElement("article");
-  if (getCarrito().has(id)) {
-    newArticle.classList.add("active");
-  }
+  if (getCarrito().has(id)) newArticle.classList.add("active");
   newArticle.setAttribute("product-id", id);
   newArticle.innerHTML = `
     <div class="details">
@@ -83,26 +80,29 @@ function buyProduct(pid) {
     article.classList.add("active");
     addToCarrito(pid);
   }
+  updateVisuals();
+}
+
+function updateVisuals() {
   updateCarritoCount();
   updateAnuncio();
-  shakeit();
 }
 
-/* Counter Carrito */
+/* Anuncio Carrito */
 
 function updateAnuncio() {
-  const carrito = getCarrito();
   const anuncio = window.document.querySelector("div.anuncio");
-  if (carrito.size === 0) {
-    anuncio.classList.remove("anuncia"); // hide
-  } else {
-    anuncio.classList.add("anuncia"); // show
-  }
+  if (getCarrito().size === 0) anuncio.classList.remove("anuncia"); // hide
+  else anuncio.classList.add("anuncia"); // show
 }
+
+/* Contador Carrito */
+
 function updateCarritoCount() {
   const contador = window.document.querySelector("p.contador");
   const nitems = getCarrito().size;
   contador.innerText = nitems === 0 ? null : nitems;
+  shakeit();
 }
 function shakeit() {
   const contador = window.document.querySelector("p.contador");
@@ -110,12 +110,12 @@ function shakeit() {
   setTimeout(() => contador.classList.remove("shakeit"), 500);
 }
 
-/* Dialog Carrito */
+/* <dialog> carrito */
 
 function closeDialog() {
   window.document.querySelector("dialog").close();
   fillProducts();
-  updateAnuncio();
+  updateVisuals();
 }
 function showDialog() {
   fillCarrito();
