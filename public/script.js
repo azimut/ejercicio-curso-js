@@ -4,19 +4,18 @@ window.onload = () => {
 
 function fillProducts() {
   if (
-    window.location.pathname !== "/" ||
-    window.location.pathname !== "/ejercicio-curso-js/"
+    window.location.pathname === "/" ||
+    window.location.pathname === "/ejercicio-curso-js/"
   )
-    return;
-  getProducts()
-    .then((products) => {
-      setProducts(products);
-      sortBySecretRecommendationAlgo(products);
-      sortByCarrito(products);
-      return products.map(producto2Article);
-    })
-    .then(appendToStore)
-    .catch((err) => console.error(err));
+    getProducts()
+      .then((products) => {
+        setProducts(products);
+        sortBySecretRecommendationAlgo(products);
+        sortByCarrito(products);
+        return products.map(producto2Article);
+      })
+      .then(appendToStore)
+      .catch((err) => console.error(err));
 }
 
 function sortByCarrito(products) {
