@@ -1,5 +1,6 @@
 window.onload = function () {
   updateCarritoCount();
+  updateAnuncio();
 };
 
 function fillProducts() {
@@ -33,6 +34,7 @@ function sortBySecretRecommendationAlgo(arr) {
 
 function appendToStore(elements) {
   const articulos = window.document.querySelector("div.articulos");
+  articulos.innerHTML = null;
   elements.forEach((el) => articulos.appendChild(el));
 }
 
@@ -82,22 +84,25 @@ function buyProduct(pid) {
     addToCarrito(pid);
   }
   updateCarritoCount();
+  updateAnuncio();
   shakeit();
 }
 
 /* Counter Carrito */
 
+function updateAnuncio() {
+  const carrito = getCarrito();
+  const anuncio = window.document.querySelector("div.anuncio");
+  if (carrito.size === 0) {
+    anuncio.classList.remove("anuncia"); // hide
+  } else {
+    anuncio.classList.add("anuncia"); // show
+  }
+}
 function updateCarritoCount() {
   const contador = window.document.querySelector("p.contador");
-  const anuncio = window.document.querySelector("div.anuncio");
   const nitems = getCarrito().size;
-  if (getCarrito().size === 0) {
-    contador.innerText = null;
-    anuncio.classList.remove("anuncia");
-  } else {
-    contador.innerText = nitems;
-    anuncio.classList.add("anuncia");
-  }
+  contador.innerText = nitems === 0 ? null : nitems;
 }
 function shakeit() {
   const contador = window.document.querySelector("p.contador");
@@ -109,6 +114,8 @@ function shakeit() {
 
 function closeDialog() {
   window.document.querySelector("dialog").close();
+  fillProducts();
+  updateAnuncio();
 }
 function showDialog() {
   fillCarrito();
@@ -159,6 +166,7 @@ function removeElementFromCarrito(pid) {
   deleteFromCarrito(pid);
   if (product) product.remove();
   if (getCarrito().size === 0) closeDialog();
+  fillCarrito();
 }
 function keepProductsInCarrito(products) {
   const carrito = getCarrito();
