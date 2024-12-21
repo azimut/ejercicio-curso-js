@@ -79,6 +79,10 @@ dialog {
   font-size: 1.4em;
   border: none;
   width: 80%;
+  > h2.greeting {
+    text-align: center;
+    margin: 1em;
+  }
   > button {
     position: absolute;
     top: 1em;

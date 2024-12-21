@@ -3,6 +3,7 @@ window.onload = () => {
 };
 
 function fillProducts() {
+  if (window.location.pathname !== "/") return;
   getProducts()
     .then((products) => {
       setProducts(products);
@@ -121,7 +122,24 @@ function showDialog() {
   fillCarrito();
   window.document.querySelector("dialog").showModal();
 }
+function fillGretting() {
+  const dialog = window.document.querySelector("dialog");
+  dialog.innerHTML = `
+    <button onclick="closeDialog()">X</button>
+    <h2 class="greeting">¡Gracias por su compra!</h2>`;
+}
 function fillCarrito() {
+  const dialog = window.document.querySelector("dialog");
+  dialog.innerHTML = `
+    <button onclick="closeDialog()">X</button>
+    <header>
+      <h1>Carrito</h1>
+    </header>
+    <table class="dock"></table>
+    <div class="checkout">
+      <table class="factura"></table>
+      <button onclick="comprar()">Comprar!</button>
+    </div>`;
   getProducts()
     .then(keepProductsInCarrito)
     .then((products) => {
@@ -136,8 +154,7 @@ function fillFactura(products) {
   const factura = window.document.querySelector("table.factura");
   factura.innerHTML = `
     <tr><td>Items:</td><td>${products.length}</td></tr>
-    <tr><td>Total:</td><td><mark>\$${roundPrice(total)}</mark></td></tr>
-  `;
+    <tr><td>Total:</td><td><mark>\$${roundPrice(total)}</mark></td></tr>`;
 }
 function appendToCarrito(elements) {
   const dock = window.document.querySelector("table.dock");
@@ -155,8 +172,7 @@ function productToElement({ id, nombre, imagen, precio }) {
     <td>\$${precio}</td>
     <td>
       <button onclick="removeElementFromCarrito(${id})">X</button>
-    </td>
-  `;
+    </td>`;
   return newItem;
 }
 function removeElementFromCarrito(pid) {
@@ -171,6 +187,11 @@ function removeElementFromCarrito(pid) {
 function keepProductsInCarrito(products) {
   const carrito = getCarrito();
   return products.filter((p) => carrito.has(p.id));
+}
+
+function comprar() {
+  setCarrito(new Set([]));
+  fillGretting();
 }
 
 /* Session Storage */
