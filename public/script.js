@@ -199,7 +199,7 @@ function productToElement({ id, nombre, imagen, precio }) {
         <button onclick="deleteOneFromCarrito(${id}); fillCarrito()">-</button>
       </div>
     </td>
-    <td>\$${roundPrice(countInCarrito(id) * precio)}</td>
+    <td class="total">\$${roundPrice(countInCarrito(id) * precio)}</td>
     <td class="delete">
       <button onclick="deleteAllFromCarrito(${id}); fillCarrito()">X</button>
     </td>`;
