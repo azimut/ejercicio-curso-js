@@ -139,6 +139,10 @@ function fillGretting() {
     <h2 class="greeting">¡Gracias por su compra!</h2>`;
 }
 function fillCarrito() {
+  if (isCarritoEmpty()) {
+    closeDialog();
+    return;
+  }
   const dialog = window.document.querySelector("dialog");
   dialog.innerHTML = `
     <button onclick="closeDialog()">X</button>
@@ -160,10 +164,13 @@ function fillCarrito() {
     .catch(console.error);
 }
 function fillFactura(products) {
-  const total = products.reduce((acc, { precio }) => acc + precio, 0);
+  const total = products.reduce(
+    (acc, product) => acc + product.precio * countInCarrito(product.id),
+    0
+  );
   const factura = window.document.querySelector("table.factura");
   factura.innerHTML = `
-    <tr><td>Items:</td><td>${products.length}</td></tr>
+    <tr><td>Items:</td><td>${sizeOfCarrito()}</td></tr>
     <tr><td>Total:</td><td><mark>\$${roundPrice(total)}</mark></td></tr>`;
 }
 function appendToCarrito(elements) {
@@ -176,11 +183,19 @@ function productToElement({ id, nombre, imagen, precio }) {
   newItem.setAttribute("product-id", id);
   newItem.innerHTML = `
     <td>${nombre}</td>
-    <td>
+    <td class="product-image">
       <img src="${imagen}" alt="${nombre}" />
     </td>
     <td>\$${precio}</td>
-    <td>
+    <td class="quantity">
+      <div>
+        <button onclick="addToCarrito(${id}); fillCarrito()">+</button>
+        <span>${countInCarrito(id)}</span>
+        <button onclick="deleteOneFromCarrito(${id}); fillCarrito()">-</button>
+      </div>
+    </td>
+    <td>\$${roundPrice(countInCarrito(id) * precio)}</td>
+    <td class="delete">
       <button onclick="removeElementFromCarrito(${id})">X</button>
     </td>`;
   return newItem;

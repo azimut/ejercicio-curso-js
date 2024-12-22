@@ -97,16 +97,37 @@ dialog {
     }
   }
   table.dock {
-    height: 10em;
+    min-height: 10em;
     overflow: scroll;
     border-collapse: collapse;
     tr {
+      vertical-align: middle;
       td {
-        padding: 2em 0.5em;
+        padding: 0 0.8em;
         text-align: center;
+      }
+      td.quantity {
+        padding: 0;
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+        }
+      }
+      td.delete {
+        padding: 0;
+        button {
+          position: absolute;
+          left: 0.4em;
+        }
+      }
+      td.product-image {
+        padding: 0.1em 0;
         img {
           vertical-align: middle;
-          width: 30%;
+          width: 60%;
           max-width: 100%;
           height: auto;
         }
@@ -278,8 +299,12 @@ body {
           display: inline-block;
           text-align: center;
           width: 2em;
+          font-size: 2em;
+          background: var(--background);
+          color: var(--foreground);
         }
         button {
+          font-size: 2em;
           font-weight: bold;
           text-shadow: none;
         }
@@ -392,10 +417,10 @@ body {
 @media (max-width: 600px) {
   body {
     dialog {
-      width: 85%;
+      width: 90%;
     }
     dialog table.dock tr td img {
-      width: 90%;
+      width: 100%;
     }
     > header {
       width: 100vw;
