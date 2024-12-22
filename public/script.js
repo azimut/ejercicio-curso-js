@@ -41,7 +41,7 @@ function appendToStore(elements) {
 }
 
 function roundPrice(price) {
-  return Math.round((price + Number.EPSILON) * 100) / 100;
+  return (Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2);
 }
 function computePrice(n) {
   return roundPrice(n / 1337);
@@ -56,7 +56,7 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
       <h3>${nombre}</h3>
       <ul>
         <li title="Precio">
-          <i class="fa-solid fa-sack-dollar"></i>\$${precio}
+          <i class="fa-solid fa-sack-dollar"></i>\$${roundPrice(precio)}
         </li>
         <li title="Numero de poligonos">
           <i class="fa-solid fa-cube"></i>${poligonos}
