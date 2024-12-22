@@ -19,12 +19,11 @@ function fillProducts() {
 }
 
 function sortByCarrito(products) {
-  const carrito = getCarrito();
   products.sort(function (a, b) {
-    if (carrito.has(a.id) && carrito.has(b.id))
+    if (isInCarrito(a.id) && isInCarrito(b.id))
       return a.nombre < b.nombre ? -1 : 1;
-    else if (carrito.has(a.id)) return -1;
-    else if (carrito.has(b.id)) return +1;
+    else if (isInCarrito(a.id)) return -1;
+    else if (isInCarrito(b.id)) return +1;
     else return 0;
   });
 }
@@ -42,7 +41,7 @@ function appendToStore(elements) {
 }
 
 function roundPrice(price) {
-  return Math.round((price + Number.EPSILON) * 100) / 100;
+  return (Math.round((price + Number.EPSILON) * 100) / 100).toFixed(2);
 }
 function computePrice(n) {
   return roundPrice(n / 1337);
@@ -50,7 +49,7 @@ function computePrice(n) {
 
 function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   const newArticle = window.document.createElement("article");
-  if (getCarrito().has(id)) newArticle.classList.add("active");
+  if (isInCarrito(id)) newArticle.classList.add("active");
   newArticle.setAttribute("product-id", id);
   newArticle.innerHTML = `
     <div class="details">
@@ -66,7 +65,12 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
           <i class="fa-regular fa-calendar"></i>${creacion}
         </li>
       </ul>
-      <button onclick="buyProduct(${id})">Comprar</button>
+      <div>
+        <button onclick="sellProduct(${id})">-</button>
+        <span class="item-counter">${countInCarrito(id) > 0 ? countInCarrito(id) : "&nbsp;"
+    }</span>
+        <button onclick="buyProduct(${id})">+</button>
+      </div>
     </div>
     <figure>
       <img src="${imagen}" alt="${nombre}" />
@@ -74,16 +78,25 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   return newArticle;
 }
 
-function buyProduct(pid) {
-  const article = window.document.querySelector(`article[product-id="${pid}"]`);
-  const carrito = getCarrito();
-  if (carrito.has(pid)) {
+function sellProduct(pid) {
+  const article = document.querySelector(`article[product-id="${pid}"]`);
+  const span = document.querySelector(`article[product-id="${pid}"] span`);
+  deleteOneFromCarrito(pid);
+  if (countInCarrito(pid) === 0) {
     article.classList.remove("active");
-    deleteFromCarrito(pid);
+    span.innerHTML = "&nbsp;";
   } else {
-    article.classList.add("active");
-    addToCarrito(pid);
+    span.innerText = countInCarrito(pid);
   }
+  updateVisuals();
+}
+
+function buyProduct(pid) {
+  const article = document.querySelector(`article[product-id="${pid}"]`);
+  const span = document.querySelector(`article[product-id="${pid}"] span`);
+  addToCarrito(pid);
+  article.classList.add("active");
+  span.innerText = countInCarrito(pid);
   updateVisuals();
 }
 
@@ -96,7 +109,7 @@ function updateVisuals() {
 
 function updateAnuncio() {
   const anuncio = window.document.querySelector("div.anuncio");
-  if (getCarrito().size === 0) anuncio.classList.remove("anuncia"); // hide
+  if (isCarritoEmpty()) anuncio.classList.remove("anuncia"); // hide
   else anuncio.classList.add("anuncia"); // show
 }
 
@@ -104,8 +117,7 @@ function updateAnuncio() {
 
 function updateCarritoCount() {
   const contador = window.document.querySelector("p.contador");
-  const nitems = getCarrito().size;
-  contador.innerText = nitems === 0 ? null : nitems;
+  contador.innerText = isCarritoEmpty() ? null : sizeOfCarrito();
   shakeit();
 }
 function shakeit() {
@@ -132,9 +144,13 @@ function fillGretting() {
     <h2 class="greeting">¡Gracias por su compra!</h2>`;
 }
 function fillCarrito() {
+  if (isCarritoEmpty()) {
+    closeDialog();
+    return;
+  }
   const dialog = window.document.querySelector("dialog");
   dialog.innerHTML = `
-    <button onclick="closeDialog()">X</button>
+    <button onclick="closeDialog()">x</button>
     <header>
       <h1>Carrito</h1>
     </header>
@@ -153,10 +169,13 @@ function fillCarrito() {
     .catch(console.error);
 }
 function fillFactura(products) {
-  const total = products.reduce((acc, { precio }) => acc + precio, 0);
+  const total = products.reduce(
+    (acc, product) => acc + product.precio * countInCarrito(product.id),
+    0
+  );
   const factura = window.document.querySelector("table.factura");
   factura.innerHTML = `
-    <tr><td>Items:</td><td>${products.length}</td></tr>
+    <tr><td>Items:</td><td>${sizeOfCarrito()}</td></tr>
     <tr><td>Total:</td><td><mark>\$${roundPrice(total)}</mark></td></tr>`;
 }
 function appendToCarrito(elements) {
@@ -169,27 +188,26 @@ function productToElement({ id, nombre, imagen, precio }) {
   newItem.setAttribute("product-id", id);
   newItem.innerHTML = `
     <td>${nombre}</td>
-    <td>
+    <td class="product-image">
       <img src="${imagen}" alt="${nombre}" />
     </td>
     <td>\$${precio}</td>
-    <td>
-      <button onclick="removeElementFromCarrito(${id})">X</button>
+    <td class="quantity">
+      <div>
+        <button onclick="addToCarrito(${id}); fillCarrito()">+</button>
+        <span>${countInCarrito(id)}</span>
+        <button onclick="deleteOneFromCarrito(${id}); fillCarrito()">-</button>
+      </div>
+    </td>
+    <td class="total">\$${roundPrice(countInCarrito(id) * precio)}</td>
+    <td class="delete">
+      <button onclick="deleteAllFromCarrito(${id}); fillCarrito()">x</button>
     </td>`;
   return newItem;
 }
-function removeElementFromCarrito(pid) {
-  const product = window.document.querySelector(
-    `table.dock tr[product-id="${pid}"]`
-  );
-  deleteFromCarrito(pid);
-  if (product) product.remove();
-  if (getCarrito().size === 0) closeDialog();
-  fillCarrito();
-}
 function keepProductsInCarrito(products) {
   const carrito = getCarrito();
-  return products.filter((p) => carrito.has(p.id));
+  return products.filter((p) => carrito.includes(p.id));
 }
 
 function comprar() {
@@ -226,20 +244,23 @@ function setProducts(products) {
   storageSet("products", products);
 }
 
-function getCarrito() {
-  return new Set(storageGet("carrito") || []);
-}
 function addToCarrito(pid) {
-  setCarrito(getCarrito().add(pid));
+  const newCarrito = getCarrito();
+  newCarrito.push(pid);
+  setCarrito(newCarrito);
 }
-function deleteFromCarrito(pid) {
-  const carrito = getCarrito();
-  carrito.delete(pid);
-  setCarrito(carrito);
+function deleteOneFromCarrito(pid) {
+  const newCarrito = getCarrito();
+  if (isInCarrito(pid)) newCarrito.splice(newCarrito.indexOf(pid), 1);
+  setCarrito(newCarrito);
 }
-function emptyOutCarrito() {
-  setCarrito(new Set([]));
+function deleteAllFromCarrito(pid) {
+  setCarrito(getCarrito().filter((p) => p !== pid));
 }
-function setCarrito(carrito) {
-  storageSet("carrito", Array.from(carrito.values()));
-}
+const countInCarrito = (pid) => getCarrito().filter((p) => p === pid).length;
+const isInCarrito = (pid) => getCarrito().includes(pid);
+const isCarritoEmpty = () => sizeOfCarrito() === 0;
+const emptyOutCarrito = () => setCarrito([]);
+const getCarrito = () => storageGet("carrito") || [];
+const setCarrito = (x) => storageSet("carrito", x);
+const sizeOfCarrito = () => getCarrito().length;
