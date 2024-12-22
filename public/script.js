@@ -193,7 +193,7 @@ function keepProductsInCarrito(products) {
 }
 
 function comprar() {
-  setCarrito(new Set([]));
+  emptyOutCarrito();
   fillGretting();
 }
 
@@ -225,6 +225,7 @@ async function getProducts() {
 function setProducts(products) {
   storageSet("products", products);
 }
+
 function getCarrito() {
   return new Set(storageGet("carrito") || []);
 }
@@ -235,6 +236,9 @@ function deleteFromCarrito(pid) {
   const carrito = getCarrito();
   carrito.delete(pid);
   setCarrito(carrito);
+}
+function emptyOutCarrito() {
+  setCarrito(new Set([]));
 }
 function setCarrito(carrito) {
   storageSet("carrito", Array.from(carrito.values()));
