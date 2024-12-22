@@ -67,7 +67,8 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
       </ul>
       <div>
         <button onclick="sellProduct(${id})">-</button>
-        <span class="item-counter">${countInCarrito(id)}</span>
+        <span class="item-counter">${countInCarrito(id) > 0 ? countInCarrito(id) : "&nbsp;"
+    }</span>
         <button onclick="buyProduct(${id})">+</button>
       </div>
     </div>
@@ -81,8 +82,12 @@ function sellProduct(pid) {
   const article = document.querySelector(`article[product-id="${pid}"]`);
   const span = document.querySelector(`article[product-id="${pid}"] span`);
   deleteOneFromCarrito(pid);
-  if (countInCarrito(pid) === 0) article.classList.remove("active");
-  span.innerText = countInCarrito(pid);
+  if (countInCarrito(pid) === 0) {
+    article.classList.remove("active");
+    span.innerHTML = "&nbsp;";
+  } else {
+    span.innerText = countInCarrito(pid);
+  }
   updateVisuals();
 }
 
