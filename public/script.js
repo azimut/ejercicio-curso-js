@@ -196,18 +196,9 @@ function productToElement({ id, nombre, imagen, precio }) {
     </td>
     <td>\$${roundPrice(countInCarrito(id) * precio)}</td>
     <td class="delete">
-      <button onclick="removeElementFromCarrito(${id})">X</button>
+      <button onclick="deleteAllFromCarrito(${id}); fillCarrito()">X</button>
     </td>`;
   return newItem;
-}
-function removeElementFromCarrito(pid) {
-  const product = window.document.querySelector(
-    `table.dock tr[product-id="${pid}"]`
-  );
-  deleteAllFromCarrito(pid);
-  if (product) product.remove();
-  if (isCarritoEmpty()) closeDialog();
-  fillCarrito();
 }
 function keepProductsInCarrito(products) {
   const carrito = getCarrito();
@@ -262,7 +253,7 @@ function deleteAllFromCarrito(pid) {
   setCarrito(getCarrito().filter((p) => p !== pid));
 }
 const countInCarrito = (pid) => getCarrito().filter((p) => p === pid).length;
-const isInCarrito = (x) => getCarrito().includes(x);
+const isInCarrito = (pid) => getCarrito().includes(pid);
 const isCarritoEmpty = () => sizeOfCarrito() === 0;
 const emptyOutCarrito = () => setCarrito([]);
 const getCarrito = () => storageGet("carrito") || [];
