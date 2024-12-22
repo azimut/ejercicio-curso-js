@@ -24,10 +24,19 @@
 
 ** ideas
 
-- dialog
-  - action on =comprar!= button
-    - remove all items from carrito
-    - show message/alert?
+- validar formulario?
+- descripcion del producto haciendo click
+- carrito
+  - cantidad cambiar
+
+- slide/ make a bar appear when there are things on carriot to purchase them
+- change item product color image when enabled
+- rotate image on click?
+- +add price to products ONCE!!+
+- +dialog+
+  - +action on =comprar!= button+
+    - +remove all items from carrito+
+    - +show message/alert?+
   - +on close+
     - +redraw borders+
     - +if empty, hide popup+
@@ -35,12 +44,7 @@
     - +cerrar cuando se elimina todo+
     - +recomputar cuando se elimina+
   - +when empty, close dialog+
-- +add price to products ONCE!!+
-
-- slide/ make a bar appear when there are things on carriot to purchase them
-- change item product color image when enabled
-- rotate image on click?
-- =burger menu= for mobile
+- +=burger menu= for mobile+
 - +sort by selected and name (at least on reload)+
 - +click again to cancel purchase+
 - +=hide= purchased items+
