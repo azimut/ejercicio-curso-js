@@ -19,12 +19,11 @@ function fillProducts() {
 }
 
 function sortByCarrito(products) {
-  const carrito = getCarrito();
   products.sort(function (a, b) {
-    if (carrito.has(a.id) && carrito.has(b.id))
+    if (isInCarrito(a.id) && isInCarrito(b.id))
       return a.nombre < b.nombre ? -1 : 1;
-    else if (carrito.has(a.id)) return -1;
-    else if (carrito.has(b.id)) return +1;
+    else if (isInCarrito(a.id)) return -1;
+    else if (isInCarrito(b.id)) return +1;
     else return 0;
   });
 }
@@ -50,7 +49,7 @@ function computePrice(n) {
 
 function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   const newArticle = window.document.createElement("article");
-  if (getCarrito().has(id)) newArticle.classList.add("active");
+  if (isInCarrito(id)) newArticle.classList.add("active");
   newArticle.setAttribute("product-id", id);
   newArticle.innerHTML = `
     <div class="details">
@@ -76,8 +75,7 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
 
 function buyProduct(pid) {
   const article = window.document.querySelector(`article[product-id="${pid}"]`);
-  const carrito = getCarrito();
-  if (carrito.has(pid)) {
+  if (isInCarrito(pid)) {
     article.classList.remove("active");
     deleteFromCarrito(pid);
   } else {
@@ -96,7 +94,7 @@ function updateVisuals() {
 
 function updateAnuncio() {
   const anuncio = window.document.querySelector("div.anuncio");
-  if (getCarrito().size === 0) anuncio.classList.remove("anuncia"); // hide
+  if (isCarritoEmpty()) anuncio.classList.remove("anuncia"); // hide
   else anuncio.classList.add("anuncia"); // show
 }
 
@@ -104,8 +102,7 @@ function updateAnuncio() {
 
 function updateCarritoCount() {
   const contador = window.document.querySelector("p.contador");
-  const nitems = getCarrito().size;
-  contador.innerText = nitems === 0 ? null : nitems;
+  contador.innerText = isCarritoEmpty() ? null : sizeOfCarrito();
   shakeit();
 }
 function shakeit() {
@@ -184,12 +181,12 @@ function removeElementFromCarrito(pid) {
   );
   deleteFromCarrito(pid);
   if (product) product.remove();
-  if (getCarrito().size === 0) closeDialog();
+  if (isCarritoEmpty()) closeDialog();
   fillCarrito();
 }
 function keepProductsInCarrito(products) {
   const carrito = getCarrito();
-  return products.filter((p) => carrito.has(p.id));
+  return products.filter((p) => carrito.includes(p.id));
 }
 
 function comprar() {
@@ -226,20 +223,17 @@ function setProducts(products) {
   storageSet("products", products);
 }
 
-function getCarrito() {
-  return new Set(storageGet("carrito") || []);
-}
 function addToCarrito(pid) {
-  setCarrito(getCarrito().add(pid));
+  const newCarrito = getCarrito();
+  newCarrito.push(pid);
+  setCarrito(newCarrito);
 }
 function deleteFromCarrito(pid) {
-  const carrito = getCarrito();
-  carrito.delete(pid);
-  setCarrito(carrito);
+  setCarrito(getCarrito().filter((p) => p !== pid));
 }
-function emptyOutCarrito() {
-  setCarrito(new Set([]));
-}
-function setCarrito(carrito) {
-  storageSet("carrito", Array.from(carrito.values()));
-}
+const isInCarrito = (x) => getCarrito().includes(x);
+const isCarritoEmpty = () => sizeOfCarrito() === 0;
+const emptyOutCarrito = () => setCarrito([]);
+const getCarrito = () => storageGet("carrito") || [];
+const setCarrito = (x) => storageSet("carrito", x);
+const sizeOfCarrito = () => getCarrito().length;
