@@ -56,7 +56,7 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
       <h3>${nombre}</h3>
       <ul>
         <li title="Precio">
-          <i class="fa-solid fa-sack-dollar"></i>\$${roundPrice(precio)}
+          <i class="fa-solid fa-sack-dollar"></i>\$${precio}
         </li>
         <li title="Numero de poligonos">
           <i class="fa-solid fa-cube"></i>${poligonos}
