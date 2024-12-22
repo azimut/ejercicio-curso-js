@@ -85,9 +85,13 @@ dialog {
   }
   > button {
     position: absolute;
-    top: 1em;
-    right: 1em;
+    top: 0;
+    right: 0.2em;
     border-radius: 50%;
+    background: white;
+    color: black;
+    text-shadow: 1.25px 1.25px 2.5px;
+    font-size: 1.5em;
   }
   header {
     h1 {
@@ -103,32 +107,36 @@ dialog {
     tr {
       vertical-align: middle;
       td {
-        padding: 0 0.8em;
+        padding: 0;
         text-align: center;
       }
       td.total {
+        text-align: center;
         padding: 0;
         min-width: 6em;
       }
       td.quantity {
         padding: 0;
+        padding-left: 1em;
         div {
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 0;
         }
       }
       td.delete {
-        padding: 0;
         button {
           position: absolute;
-          left: 0.4em;
+          right: 0.4em;
+          background: white;
+          color: #cf0000;
+          font-size: 1em;
+          text-shadow: 1.25px 1.25px 2.5px;
+          transform: translateY(-0.8em);
         }
       }
       td.product-image {
-        padding: 0.1em 0;
         img {
           vertical-align: middle;
           width: 60%;
@@ -307,7 +315,6 @@ body {
           display: inline-block;
           text-align: center;
           width: 2em;
-          border: 1px solid black;
           font-size: 1.2em;
         }
         button {

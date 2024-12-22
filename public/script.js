@@ -150,7 +150,7 @@ function fillCarrito() {
   }
   const dialog = window.document.querySelector("dialog");
   dialog.innerHTML = `
-    <button onclick="closeDialog()">X</button>
+    <button onclick="closeDialog()">x</button>
     <header>
       <h1>Carrito</h1>
     </header>
@@ -201,7 +201,7 @@ function productToElement({ id, nombre, imagen, precio }) {
     </td>
     <td class="total">\$${roundPrice(countInCarrito(id) * precio)}</td>
     <td class="delete">
-      <button onclick="deleteAllFromCarrito(${id}); fillCarrito()">X</button>
+      <button onclick="deleteAllFromCarrito(${id}); fillCarrito()">x</button>
     </td>`;
   return newItem;
 }
