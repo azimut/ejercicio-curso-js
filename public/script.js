@@ -65,7 +65,11 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
           <i class="fa-regular fa-calendar"></i>${creacion}
         </li>
       </ul>
-      <button onclick="buyProduct(${id})">Comprar</button>
+      <div>
+        <button onclick="sellProduct(${id})">-</button>
+        <span class="item-counter">${countInCarrito(id)}</span>
+        <button onclick="buyProduct(${id})">+</button>
+      </div>
     </div>
     <figure>
       <img src="${imagen}" alt="${nombre}" />
@@ -73,15 +77,21 @@ function producto2Article({ id, nombre, imagen, creacion, poligonos, precio }) {
   return newArticle;
 }
 
+function sellProduct(pid) {
+  const article = document.querySelector(`article[product-id="${pid}"]`);
+  const span = document.querySelector(`article[product-id="${pid}"] span`);
+  deleteOneFromCarrito(pid);
+  if (countInCarrito(pid) === 0) article.classList.remove("active");
+  span.innerText = countInCarrito(pid);
+  updateVisuals();
+}
+
 function buyProduct(pid) {
-  const article = window.document.querySelector(`article[product-id="${pid}"]`);
-  if (isInCarrito(pid)) {
-    article.classList.remove("active");
-    deleteFromCarrito(pid);
-  } else {
-    article.classList.add("active");
-    addToCarrito(pid);
-  }
+  const article = document.querySelector(`article[product-id="${pid}"]`);
+  const span = document.querySelector(`article[product-id="${pid}"] span`);
+  addToCarrito(pid);
+  article.classList.add("active");
+  span.innerText = countInCarrito(pid);
   updateVisuals();
 }
 
@@ -179,7 +189,7 @@ function removeElementFromCarrito(pid) {
   const product = window.document.querySelector(
     `table.dock tr[product-id="${pid}"]`
   );
-  deleteFromCarrito(pid);
+  deleteAllFromCarrito(pid);
   if (product) product.remove();
   if (isCarritoEmpty()) closeDialog();
   fillCarrito();
@@ -228,9 +238,15 @@ function addToCarrito(pid) {
   newCarrito.push(pid);
   setCarrito(newCarrito);
 }
-function deleteFromCarrito(pid) {
+function deleteOneFromCarrito(pid) {
+  const newCarrito = getCarrito();
+  if (isInCarrito(pid)) newCarrito.splice(newCarrito.indexOf(pid), 1);
+  setCarrito(newCarrito);
+}
+function deleteAllFromCarrito(pid) {
   setCarrito(getCarrito().filter((p) => p !== pid));
 }
+const countInCarrito = (pid) => getCarrito().filter((p) => p === pid).length;
 const isInCarrito = (x) => getCarrito().includes(x);
 const isCarritoEmpty = () => sizeOfCarrito() === 0;
 const emptyOutCarrito = () => setCarrito([]);

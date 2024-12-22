@@ -274,8 +274,14 @@ body {
         ul > li > i {
           padding: 0 0.3em;
         }
+        span {
+          display: inline-block;
+          text-align: center;
+          width: 2em;
+        }
         button {
-          width: 100%;
+          font-weight: bold;
+          text-shadow: none;
         }
       }
       figure {
