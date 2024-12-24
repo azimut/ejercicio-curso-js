@@ -14,6 +14,7 @@ Tienda de modelos 3D.
   - flex
   - grid: para los elementos de la tienda
   - animacion basada en keyframes para el contador del carrito[*](https://unused-css.com/blog/css-shake-animation/)
+  - inset box-shadow para mostrar campos `<input>` no validos [*](https://designshack.net/articles/css/inner-shadows-in-css-images-text-and-beyond/)
 
 - Javascript
   - productos agregados al DOM de forma dinamica
