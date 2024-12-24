@@ -370,8 +370,13 @@ body {
     input {
       font-size: 1.25em;
       padding: 0.25em;
+      background: var(--foreground);
+    }
+    .invalid {
+      box-shadow: inset 0px 0px 20px 0px darkred;
     }
     textarea {
+      background: var(--foreground);
       font-size: 1.25em;
       resize: none; /* override default */
     }

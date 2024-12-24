@@ -2,6 +2,27 @@ window.onload = () => {
   updateVisuals();
 };
 
+function validateNonEmpty(input) {
+  if (input.value && input.value.length > 0) {
+    input.classList.remove("invalid");
+  } else {
+    input.classList.add("invalid");
+  }
+  console.log(input.value);
+}
+
+function validateEmail(input) {
+  const email = input.value;
+  const mailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email.toLowerCase().match(mailRegex)) {
+    input.classList.remove("invalid");
+  } else {
+    input.classList.add("invalid");
+  }
+  console.log(email);
+}
+
 function fillProducts() {
   if (
     window.location.pathname === "/" ||

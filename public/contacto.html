@@ -48,6 +48,7 @@
         <input
           name="email"
           type="email"
+          oninput="validateEmail(this)"
           placeholder="email@ejemplo.com"
           required
         />
@@ -56,6 +57,7 @@
           name="mensaje"
           cols="30"
           rows="10"
+          oninput="validateNonEmpty(this)"
           placeholder="..."
           required
         ></textarea>
